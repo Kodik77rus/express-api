@@ -1,11 +1,12 @@
 const express = require('express')
+const adControler = require('../controllers/ad.js')
+
 const router = express.Router()
 
+router.get('/ads', adControler.getTenAd)
 
-router.get('/ads')
+router.get('ad/:id', adControler.getOneAd)
 
-router.get('ad/:id')
-
-router.post('/ad')
+router.post('/ad', adControler.createAd)
 
 module.exports = router
