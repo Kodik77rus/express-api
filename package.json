@@ -1,0 +1,29 @@
+{
+  "name": "firstapi",
+  "version": "1.0.0",
+  "description": "This service for storing and submitting ads",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kodik77rus/firstAPI.git"
+  },
+  "author": "Kodik77rus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kodik77rus/firstAPI/issues"
+  },
+  "homepage": "https://github.com/Kodik77rus/firstAPI#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jest": "^26.6.3",
+    "mongoose": "^5.11.19"
+  }
+}
