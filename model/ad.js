@@ -20,10 +20,24 @@ const ad = new Schema({
     type: Date,
     default: Date.now
   },
-  img: [{
-    type: String,
-    maxItems: 3
-  }]
+  imgURLs: {
+    type: [String],
+    validate: {
+      validator: function (arr) {
+        return arr.length > 1 && arr.length < 4 && Array.isArray(arr)
+      },
+      message: 'You must pass an array of more than 1 url and no more than 3 urls.'
+    }
+  }
 })
+
+ad.path('imgURLs').validate((urls) => {
+  urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+  if (urls.map(u => urlRegex.test(u)).find(u => u === false) === undefined) {
+    return true
+  } else {
+    return false
+  }
+}, 'Invalid URL.')
 
 module.exports = model('Ad', ad)
