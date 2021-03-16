@@ -10,7 +10,7 @@ exports.createAd = async (ad) => {
   }
 }
 
-exports.getTenAd = async (query) => {
+exports.getAds = async (query) => {
   try {
     const isValid = utils.querySortValidator(query)
     if (isValid) {
