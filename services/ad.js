@@ -1,6 +1,12 @@
-exports.createAd = async () => {
-  // save ad into db 
-  // rerun post.id
+const Ad = require('../model/ad')
+
+exports.createAd = async (ad) => {
+  try {
+    const postedAd = await new Ad(ad).save()
+    return postedAd
+  } catch (err) {
+    return err
+  }
 }
 
 exports.getTenAd = async () => {
