@@ -15,8 +15,12 @@ exports.createAd = async (req, res) => {
 
 exports.getTenAd = async (req, res) => {
   try {
-    const sortAd = adServces.getTenAd(req.query)
-    res.status(201).json(sortAd)
+    const sortAd = await adServces.getTenAd(req.query)
+    if (sortAd.hasOwnProperty('message')) {
+      res.status(400).json({ message: sortAd.message })
+    } else {
+      res.status(200).json(sortAd)
+    }
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
