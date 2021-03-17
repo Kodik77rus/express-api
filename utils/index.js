@@ -1,17 +1,4 @@
-//full refactor
-
-const VALID_QUERY_REQ_SORT = [
-  'byPriceAsс', 'byPriceDesc',
-  'byDateAsc', 'byDateDesc',
-]
-
-const VALID_QUERY_GET_AD = [
-  'description', 'imgURLs',
-]
-
-exports.URL_FOR_CONNECT_TO_DB = 'mongodb+srv://george:Z34vE8Nm3xaiifoF@cluster0.fihkq.mongodb.net/ads?retryWrites=true&w=majority'
-
-exports.PAGE_SIZE = 10
+const constants = require('../constants')
 
 exports.querySortValidator = (query) => {
   if (query.sort && +query.page > 0) {
@@ -20,8 +7,8 @@ exports.querySortValidator = (query) => {
       if (
         keys.length === 2 &&
         keys[0] !== keys[1] &&
-        VALID_QUERY_REQ_SORT.includes(keys[0]) &&
-        VALID_QUERY_REQ_SORT.includes(keys[1])
+        constants.VALID_QUERY_REQ_SORT.includes(keys[0]) &&
+        constants.VALID_QUERY_REQ_SORT.includes(keys[1])
       ) {
         if (keys[0].includes('Price') && !(keys[1].includes('Price'))) {
           return {
@@ -41,7 +28,7 @@ exports.querySortValidator = (query) => {
       }
     } else if (
       !(query.sort.includes(',')) &&
-      VALID_QUERY_REQ_SORT.includes(query.sort)
+      constants.VALID_QUERY_REQ_SORT.includes(query.sort)
     ) {
       if (query.sort.includes('Price')) {
         return {
@@ -65,8 +52,8 @@ exports.queryAdValidator = (query) => {
     if (query.query) {
       const key = query.query.fields.split(',')
       if (key.length === 2 &&
-        VALID_QUERY_GET_AD.includes(key[0]) &&
-        VALID_QUERY_GET_AD.includes(key[1])
+        constants.VALID_QUERY_GET_AD.includes(key[0]) &&
+        constants.VALID_QUERY_GET_AD.includes(key[1])
       ) {
         return {
           title: 1,
@@ -77,7 +64,7 @@ exports.queryAdValidator = (query) => {
         }
       } else if (
         key.length === 1 &&
-        VALID_QUERY_GET_AD.includes(key[0])
+        constants.VALID_QUERY_GET_AD.includes(key[0])
       ) {
         if (key[0].includes('description')) {
           return {

@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const adRouter = require('./routes/ad')
-const URL =  require('./utils')
+const constants = require('./constants')
 
 const PORT = process.env.PORT || 3000
 
@@ -14,7 +14,7 @@ app.use('/api', adRouter)
 async function start() {
   try {
     await mongoose.connect(
-      URL.URL_FOR_CONNECT_TO_DB,
+      constants.URL_FOR_CONNECT_TO_DB,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

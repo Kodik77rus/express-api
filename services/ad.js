@@ -1,5 +1,6 @@
 const Ad = require('../model/ad')
 const utils = require('../utils')
+const constants = require('../constants')
 
 exports.createAd = async (ad) => {
   try {
@@ -16,10 +17,10 @@ exports.getAds = async (query) => {
     if (isValid) {
       return await Ad.find({}, { title: 1, price: 1, mainUrl: { $first: "$imgURLs" }, _id: 0 })
         .sort(isValid)
-        .skip(utils.PAGE_SIZE * (+query.page - 1))
-        .limit(utils.PAGE_SIZE)
+        .skip(constants.PAGE_SIZE * (+query.page - 1))
+        .limit(constants.PAGE_SIZE)
     } else {
-      throw new Error('Bad request')
+      throw new Error(constants.DICTIONARY.errors.badRequest)
     }
   } catch (err) {
     return err
