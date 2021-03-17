@@ -17,7 +17,7 @@ exports.getAds = async (query) => {
     if (isValid) {
       return await Ad.find({}, { title: 1, price: 1, mainUrl: { $first: "$imgURLs" }, _id: 0 })
         .sort(isValid)
-        .skip(constants.PAGE_SIZE * (+query.page - 1))
+        .skip(constants.PAGE_SIZE * (query.page - 1))
         .limit(constants.PAGE_SIZE)
     } else {
       throw new Error(constants.DICTIONARY.errors.badRequest)
