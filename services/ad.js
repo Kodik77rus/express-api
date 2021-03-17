@@ -26,7 +26,15 @@ exports.getAds = async (query) => {
   }
 }
 
-exports.getOneAd = async () => {
-  //req to db
-  // return ad
+exports.getAd = async (ad) => {
+  try {
+    const isValid = utils.queryAdValidator(ad)
+    if (isValid) {
+      return await Ad.findById(ad.paramId, isValid)
+    } else {
+      throw new Error('Bad request')
+    }
+  } catch (err) {
+    return err
+  }
 }
