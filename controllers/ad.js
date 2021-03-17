@@ -2,27 +2,42 @@ const adServces = require('../services/ad')
 
 exports.createAd = async (req, res) => {
   try {
-    const ad = await adServces.createAd(req.body)
-    res.status(201).json(ad.id)
+    const createdAd = await adServces.createAd(req.body)
+    if (createdAd.hasOwnProperty('message')) {
+      res.status(400).json({ message: createdAd.message })
+    } else {
+      res.status(201).json({ id: createdAd.id })
+    }
   } catch (err) {
-    res.status(500).json({ messege: err.messege })
+    res.status(500).json({ message: err.message })
   }
 }
 
-exports.getTenAd = async (req, res) => {
+exports.getAds = async (req, res) => {
   try {
-    const sortAd = adServces.getTenAd(req.query)
-    res.status(201).json(sortAd)
+    const sortAd = await adServces.getAds(req.query)
+    if (sortAd.hasOwnProperty('message')) {
+      res.status(400).json({ message: sortAd.message })
+    } else {
+      res.status(200).json(sortAd)
+    }
   } catch (err) {
-    res.status(500).json({ messege: err.messege })
+    res.status(500).json({ message: err.message })
   }
 }
 
-exports.getOneAd = async (req, res) => {
+exports.getAd = async (req, res) => {
   try {
-    const ad = await adServces.getOneAd(req.param)
-    res.status(200).json(ad)
+    const ad = await adServces.getAd({
+      paramId: req.params.id,
+      query: req.query,
+    })
+    if (ad.hasOwnProperty('message')) {
+      res.status(400).json({ message: ad.message })
+    } else {
+      res.status(200).json(ad)
+    }
   } catch (err) {
-    res.status(500).json({ messege: err.messege })
+    res.status(500).json({ message: err.message })
   }
 }

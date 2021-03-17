@@ -3,9 +3,9 @@ const adControler = require('../controllers/ad.js')
 
 const router = express.Router()
 
-router.get('/ads', adControler.getTenAd)
+router.get('/ads', adControler.getAds)
 
-router.get('ad/:id', adControler.getOneAd)
+router.get('/ad/:id', adControler.getAd)
 
 router.post('/ad', adControler.createAd)
 

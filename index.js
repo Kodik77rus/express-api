@@ -14,7 +14,7 @@ app.use('/api', adRouter)
 async function start() {
   try {
     await mongoose.connect(
-      URL,
+      URL.URL_FOR_CONNECT_TO_DB,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
