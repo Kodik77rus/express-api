@@ -1,5 +1,6 @@
-const dictionary = require('../constants')
 const { Schema, model } = require('mongoose')
+const validator = require('../utils')
+const dictionary = require('../constants')
 
 const ad = new Schema({
   title: {
@@ -24,21 +25,12 @@ const ad = new Schema({
   imgURLs: {
     type: [String],
     validate: {
-      validator: function (arr) {
-        return arr.length > 1 && arr.length < 4 && Array.isArray(arr)
-      },
+      validator: validator.arrayValidator,
       message: dictionary.DICTIONARY.schema.imgURLs
     }
   }
 })
 
-ad.path('imgURLs').validate((urls) => {
-  urlRegex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-  if (urls.map(u => urlRegex.test(u)).find(u => u === false) === undefined) {
-    return true
-  } else {
-    return false
-  }
-}, dictionary.DICTIONARY.schema.validationUrl)
+ad.path('imgURLs').validate(validator.shemaUrlValidator, dictionary.DICTIONARY.schema.validationUrl)
 
 module.exports = model('Ad', ad)

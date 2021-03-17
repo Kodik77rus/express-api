@@ -17,7 +17,7 @@ exports.DICTIONARY = {
     description: 'Ad description required',
     price: 'Ad price required',
     imgURLs: 'You must pass an array of more than 1 url and no more than 3 urls.',
-    validationUrl: 'Invalid URL',
+    validationUrl: 'Invalid URL, URL must contains http or https',
   },
   errors: {
     badRequest: 'Bad request'
