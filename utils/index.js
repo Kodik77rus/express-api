@@ -1,6 +1,6 @@
 
 exports.shemaArrayValidator = (arr) => {
-  return arr.length > 1 && arr.length < 4 && Array.isArray(arr)
+  return arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 }
 
 exports.shemaUrlValidator = (urls) => {
