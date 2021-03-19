@@ -1,17 +1,26 @@
 # firstApi
-This is my implementation of this task https://github.com/avito-tech/adv-backend-trainee-assignment/blob/main/README.md.
 
-This project based on this stack:
-  1.MongoDB
-  2.NodeJS
+This service for storing and submitting ads.
 
-npm modules used:
+## Overview 
 
-  1.ExpressJS
-  2.Jest
-  3.Mongoose
-  4.Nodemon
- 
+This is my implementation of this [task](https://github.com/avito-tech/adv-backend-trainee-assignment/blob/main/README.md).
+The API is organized around REST. API has predictable resource-oriented URLs, all endpoints are validated and returns JSON- responses, uses standard HTTP response codes.
+
+## About stack:
+
+This project based on:
+
+-   MongoDB
+-   NodeJS
+
+### npm modules used:
+-   Axios
+-   ExpressJS
+-   Jest
+-   Mongoose
+-   Nodemon
+
 Base features:
 
 Additional features:
