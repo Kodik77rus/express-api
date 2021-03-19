@@ -4,11 +4,11 @@ exports.PAGE_SIZE = 10
 
 exports.VALID_QUERY_REQ_SORT = [
   'byPriceAsс', 'byPriceDesc',
-  'byDateAsc', 'byDateDesc',
+  'byDateAsc', 'byDateDesc'
 ]
 
 exports.VALID_QUERY_GET_AD = [
-  'description', 'imgURLs',
+  'description', 'imgURLs'
 ]
 
 exports.DICTIONARY = {
@@ -21,5 +21,5 @@ exports.DICTIONARY = {
   },
   errors: {
     badRequest: 'Bad request'
-  },
+  }
 }

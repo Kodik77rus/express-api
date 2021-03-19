@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const adRouter = require('./routes/ad')
-const constants = require('./constants')
+const { URL_FOR_CONNECT_TO_DB } = require('./constants')
 
 const PORT = process.env.PORT || 3000
 
@@ -11,10 +11,10 @@ app.use(express.json())
 
 app.use('/api', adRouter)
 
-async function start() {
+const start = async () => {
   try {
     await mongoose.connect(
-      constants.URL_FOR_CONNECT_TO_DB,
+      URL_FOR_CONNECT_TO_DB,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -22,7 +22,7 @@ async function start() {
         useCreateIndex: true
       }
     )
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
       console.log(`App listening at http://localhost:${PORT}`)
     })
   } catch (e) {

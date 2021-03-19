@@ -1,5 +1,5 @@
 
-exports.arrayValidator = (arr) => {
+exports.shemaArrayValidator = (arr) => {
   return arr.length > 1 && arr.length < 4 && Array.isArray(arr)
 }
 
@@ -74,7 +74,7 @@ exports.queryAdValidator = (query) => {
           price: 1,
           description: 1,
           imgURLs: 1,
-          _id: 0,
+          _id: 0
         }
       } else if (
         key.length === 1 &&
@@ -85,14 +85,14 @@ exports.queryAdValidator = (query) => {
             title: 1,
             price: 1,
             description: 1,
-            _id: 0,
+            _id: 0
           }
         } else {
           return {
             title: 1,
             price: 1,
             imgURLs: 1,
-            _id: 0,
+            _id: 0
           }
         }
       } else {
@@ -106,7 +106,7 @@ exports.queryAdValidator = (query) => {
       title: 1,
       price: 1,
       mainUrl: { $first: "$imgURLs" },
-      _id: 0,
+      _id: 0
     }
   } else {
     return false

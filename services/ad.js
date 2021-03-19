@@ -1,6 +1,6 @@
 const Ad = require('../model/ad')
-const utils = require('../utils')
-const constants = require('../constants')
+const { querySortValidator, queryAdValidator } = require('../utils')
+const { PAGE_SIZE, DICTIONARY } = require('../constants')
 
 exports.createAd = async (ad) => {
   try {
@@ -13,14 +13,14 @@ exports.createAd = async (ad) => {
 
 exports.getAds = async (query) => {
   try {
-    const isValid = utils.querySortValidator(query)
+    const isValid = querySortValidator(query)
     if (isValid) {
       return await Ad.find({}, { title: 1, price: 1, mainUrl: { $first: "$imgURLs" }, _id: 0 })
         .sort(isValid)
-        .skip(constants.PAGE_SIZE * (query.page - 1))
-        .limit(constants.PAGE_SIZE)
+        .skip(PAGE_SIZE * (query.page - 1))
+        .limit(PAGE_SIZE)
     } else {
-      throw new Error(constants.DICTIONARY.errors.badRequest)
+      throw new Error(DICTIONARY.errors.badRequest)
     }
   } catch (err) {
     return err
@@ -29,7 +29,7 @@ exports.getAds = async (query) => {
 
 exports.getAd = async (ad) => {
   try {
-    const isValid = utils.queryAdValidator(ad)
+    const isValid = queryAdValidator(ad)
     if (isValid) {
       return await Ad.findById(ad.paramId, isValid)
     } else {

@@ -1,22 +1,22 @@
 const { Schema, model } = require('mongoose')
-const validator = require('../utils')
-const dictionary = require('../constants')
+const { shemaUrlValidator, shemaArrayValidator } = require('../utils')
+const { DICTIONARY } = require('../constants')
 
 const ad = new Schema({
   title: {
     type: String,
     maxlength: 200,
-    required: [true, dictionary.DICTIONARY.schema.title]
+    required: [true, DICTIONARY.schema.title]
   },
   description: {
     type: String,
     maxlength: 1000,
-    required: [true, dictionary.DICTIONARY.schema.description]
+    required: [true, DICTIONARY.schema.description]
   },
   price: {
     type: Number,
     min: 0,
-    required: [true, dictionary.DICTIONARY.schema.price]
+    required: [true, DICTIONARY.schema.price]
   },
   date: {
     type: Date,
@@ -25,12 +25,12 @@ const ad = new Schema({
   imgURLs: {
     type: [String],
     validate: {
-      validator: validator.arrayValidator,
-      message: dictionary.DICTIONARY.schema.imgURLs
+      validator: shemaArrayValidator,
+      message: DICTIONARY.schema.imgURLs
     }
   }
 })
 
-ad.path('imgURLs').validate(validator.shemaUrlValidator, dictionary.DICTIONARY.schema.validationUrl)
+ad.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schema.validationUrl)
 
 module.exports = model('Ad', ad)
