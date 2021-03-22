@@ -118,6 +118,8 @@ returns response satus code 200, and a json object which contains an title, pric
 
 GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
 
+>position of the attributes passed in the `fields` is not important
+
 returns
 
 ```json
