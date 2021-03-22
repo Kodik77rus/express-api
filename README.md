@@ -38,7 +38,7 @@ Create an ad and returns response satus code 201, and a json object which contai
 
  >Automatically creates an id and date in ISO 8601 format
  
-#### _Examples_:
+#### _Example_:
 
 POST `api/ad`
 
@@ -78,7 +78,7 @@ Returns ad
 
 GET `api/ad/604a990f7c6dba`
 
-returns response satus code 200, and a json object which contains an title, price, and main img url of ad
+returns response satus code 200, and a json object which contains a title, price, and main image url of ad
 
 ```json
 {
@@ -90,7 +90,7 @@ returns response satus code 200, and a json object which contains an title, pric
 
 GET `api/ad/604a990f7c6dba?fields=imgURLs`
 
-returns response satus code 200, and a json object which contains an title, price, and all imgs url of ad
+returns response satus code 200, and a json object which contains a title, price, and all images urls of ad
 
 ```json
 {
@@ -106,7 +106,7 @@ returns response satus code 200, and a json object which contains an title, pric
 
 GET `api/ad/604a990f7c6dba?fields=description`
 
-returns response satus code 200, and a json object which contains an title, price, and description of ad
+returns response satus code 200, and a json object which contains a title, price and description of ad
 
 ```json
 {
@@ -120,7 +120,7 @@ GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
 
 >position of the attributes passed in the `fields` is not important
 
-returns
+returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad
 
 ```json
 {
