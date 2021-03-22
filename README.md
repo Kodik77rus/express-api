@@ -3,9 +3,15 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
-1. [Overview](#overview)
-1. [About stack](#about-stack)
-2. [API Methods](#api-methods)
+- [Overview](#overview)
+- [About stack](#about-stack)
+  - [This-project-based-on](#this-project-based-on)
+  - [NPM-modules-used](#npm-modules-used)
+  - [MongoDB-schema](#mongodb-schema)
+- [API Methods](#api-methods)
+  - [POST ad](#post-ad)
+  - [GET ad](#get-ad)
+  - [GET ads](#get-ad)
 
 ## Overview <a name="overview"></a>
 
@@ -14,19 +20,19 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 
 ## About stack <a name="about-stack"></a>
 
-### This project based on:
+### This project based on: <a name="this-project-based-on"></a>
 
 -   MongoDB
 -   NodeJS
 
-### NPM modules used:
+### NPM modules used: <a name="npm-modules-used"></a>
 -   Axios
 -   ExpressJS
 -   Jest
 -   Mongoose
 -   Nodemon
 
-### MongoDB schema:
+### MongoDB schema: <a name="mongodb-schema"></a> 
 
 ```js
 // defines the metadata of the schema model -
@@ -64,7 +70,7 @@ const ad = new Schema({
 
 ## API Methods <a name="api-methods"></a>
 
-### POST ad
+### POST <a name="ad post-ad"></a>
 
 This method takes: title, description, links images, price, and returns the ID of the created ad and \
 response status code.
@@ -101,7 +107,7 @@ returns response satus code 201, and a json object which contains an id of creat
 }
 ```
 
-### GET ad
+### GET ad <a name="get-ad"></a>
 
 This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
 Optional fields (you can request them by passing the fields parameter): description, links to all photos
@@ -178,7 +184,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-### GET ads
+### GET ads <a name="get-ads"></a>
 
 This method has pagination: there are 10 ads on one page;\
 It also sorts: by price (ascending / descending) and by creation date (ascending/descending);\
