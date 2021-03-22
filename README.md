@@ -3,15 +3,22 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
-- [Overview](#overview)
-- [About stack](#about-stack)
-  - [This-project-based-on](#this-project-based-on)
-  - [NPM-modules-used](#npm-modules-used)
-  - [MongoDB-schema](#mongodb-schema)
-- [API Methods](#api-methods)
-  - [POST ad](#post-ad)
-  - [GET ad](#get-ad)
-  - [GET ads](#get-ad)
+-  [Navigation](#navigation)
+-  [Overview <a name="overview"></a>](#overview-)
+- [About stack <a name="about-stack"></a>](#about-stack-)
+  - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
+  - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
+  - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+- [API Methods <a name="api-methods"></a>](#api-methods-)
+  - [POST <a name="ad post-ad"></a>](#post-)
+    - [Arguments:](#arguments)
+    - [_Example_:](#example)
+  - [GET ad <a name="get-ad"></a>](#get-ad-)
+    - [Arguments:](#arguments-1)
+    - [_Examples_:](#examples)
+  - [GET ads <a name="get-ads"></a>](#get-ads-)
+    - [Arguments:](#arguments-2)
+     - [_Examples_:](#examples-1)
 
 ## Overview <a name="overview"></a>
 
