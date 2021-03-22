@@ -24,6 +24,9 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 ### MongoDB schema:
 
 ```js
+// defines the metadata of the schema model -
+// its properties, data types and validation
+
 const ad = new Schema({
   title: {
     type: String,
