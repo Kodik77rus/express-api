@@ -14,12 +14,44 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 -   MongoDB
 -   NodeJS
 
-### npm modules used:
+### NPM modules used:
 -   Axios
 -   ExpressJS
 -   Jest
 -   Mongoose
 -   Nodemon
+
+### MongoDB schema:
+
+```js
+const ad = new Schema({
+  title: {
+    type: String,
+    maxlength: 200,
+    required: [true, DICTIONARY.schema.title]
+  },
+  description: {
+    type: String,
+    maxlength: 1000,
+    required: [true, DICTIONARY.schema.description]
+  },
+  price: {
+    type: Number,
+    min: 0,
+    required: [true, DICTIONARY.schema.price]
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  imgURLs: {
+    type: [String],
+    validate: {
+      validator: shemaArrayValidator,
+      message: DICTIONARY.schema.imgURLs
+    }
+  }
+})
 
 ## API Methods
 
