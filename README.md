@@ -14,12 +14,19 @@ This is pet service for storing and submitting ads.
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [_Arguments_:](#arguments)
       - [_Example_:](#example)
+      - [POST `api/ad`](#post-apiad)
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
       - [_Arguments_:](#arguments-1)
       - [_Examples_:](#examples)
+      - [1. GET `/api/ad/604a990f7c6dba`](#1-get-apiad604a990f7c6dba)
+      - [2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-apiad604a990f7c6dbafieldsimgurls)
+      - [3. GET `/api/ad/604a990f7c6dba?fields=description`](#3-get-apiad604a990f7c6dbafieldsdescription)
+      - [4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-apiad604a990f7c6dbafieldsimgurlsdescription)
     - [GET Ads <a name="get-ads"></a>](#get-ads-)
       - [_Arguments_:](#arguments-2)
       - [_Examples_:](#examples-1)
+      - [1. GET `/api/ads?page=1&sort=byPriceAsс`](#1-get-apiadspage1sortbypriceasс)
+      - [2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-apiadspage2sortbypricedescbydateasc)
 
 ## Overview <a name="overview"></a>
 
@@ -96,7 +103,7 @@ response status code.
 
 #### _Example_:
 
-POST `api/ad`
+#### POST `api/ad`
 
 ```json
 {
@@ -135,7 +142,7 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 #### _Examples_:
 
-1. GET `api/ad/604a990f7c6dba`
+#### 1. GET `/api/ad/604a990f7c6dba`
 
 returns response satus code 200, and a json object which contains a title, price, and main image url of ad.
 
@@ -147,7 +154,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-2. GET `api/ad/604a990f7c6dba?fields=imgURLs`
+#### 2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`
 
 returns response satus code 200, and a json object which contains a title, price, and all images urls of ad.
 
@@ -163,7 +170,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-3. GET `api/ad/604a990f7c6dba?fields=description`
+#### 3. GET `/api/ad/604a990f7c6dba?fields=description`
 
 returns response satus code 200, and a json object which contains a title, price and description of ad.
 
@@ -175,7 +182,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-4. GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
+#### 4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`
 
 returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad.
 
@@ -219,4 +226,92 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 #### _Examples_:
 
-1. GET `api/ads?page=1&sort=byPriceAsс`
+#### 1. GET `/api/ads?page=1&sort=byPriceAsс`
+
+returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
+
+```json
+[
+  {
+    "title": "title_7",
+    "price": 9,
+    "mainUrl": "https://mainImg"
+  },
+  {
+    "title": "crutches",
+    "price": 77,
+    "mainUrl": "https://mainImg"
+  },
+  {
+    "title": "crutches",
+    "price": 77,
+    "mainUrl": "https://mainImg"
+  },
+  {
+    "title": "crutches",
+    "price": 78,
+    "mainUrl": "https://mainImg"
+  },
+  {
+    "title": "title_5",
+    "price": 123,
+    "mainUrl": "https://mainImg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 567,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+///and other 4
+]
+```
+
+#### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
+
+return 
+
+```json
+[
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 677,
+    "mainUrl": "https://tasha"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 677,
+    "mainUrl": "https://tasha"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 677,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+      "price": 567,
+      "mainUrl": "http://dfgdsfgdsfg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 567,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 567,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 567,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+  {
+    "title": "[pergggggggggggggggggggggggggty",
+    "price": 567,
+    "mainUrl": "http://dfgdsfgdsfg"
+  },
+
+  //and other 2
+```

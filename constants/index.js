@@ -3,7 +3,7 @@ exports.URL_FOR_CONNECT_TO_DB = 'mongodb+srv://george:Z34vE8Nm3xaiifoF@cluster0.
 exports.PAGE_SIZE = 10
 
 exports.VALID_QUERY_REQ_SORT = [
-  'byPriceAsс', 'byPriceDesc',
+  'byPriceAsc', 'byPriceDesc',
   'byDateAsc', 'byDateDesc'
 ]
 
