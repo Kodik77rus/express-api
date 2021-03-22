@@ -3,22 +3,21 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
--  [Navigation](#navigation)
 -  [Overview <a name="overview"></a>](#overview-)
 - [About stack <a name="about-stack"></a>](#about-stack-)
   - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
   - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
   - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
 - [API Methods <a name="api-methods"></a>](#api-methods-)
-  - [POST <a name="ad post-ad"></a>](#post-)
-    - [Arguments:](#arguments)
-    - [_Example_:](#example)
-  - [GET ad <a name="get-ad"></a>](#get-ad-)
-    - [Arguments:](#arguments-1)
+  - [POST Ad <a name="ad post-ad"></a>](#post-)
+    - [_Arguments_](#arguments)
+    - [_Example_](#example)
+  - [GET Ad <a name="get-ad"></a>](#get-ad-)
+    - [_Arguments_](#arguments-1)
     - [_Examples_:](#examples)
-  - [GET ads <a name="get-ads"></a>](#get-ads-)
-    - [Arguments:](#arguments-2)
-     - [_Examples_:](#examples-1)
+  - [GET Ads <a name="get-ads"></a>](#get-ads-)
+    - [_Arguments_:](#arguments-2)
+    - [_Examples_:](#examples-1)
 
 ## Overview <a name="overview"></a>
 
@@ -77,12 +76,12 @@ const ad = new Schema({
 
 ## API Methods <a name="api-methods"></a>
 
-### POST <a name="ad post-ad"></a>
+### POST Ad <a name="ad post-ad"></a>
 
 This method takes: title, description, links images, price, and returns the ID of the created ad and \
 response status code.
 
-#### Arguments:
+#### _Arguments_:
 
 | Request Body    |       type       | description       | validation                                                                    | require |
 | --------------- | :--------------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
@@ -114,21 +113,21 @@ returns response satus code 201, and a json object which contains an id of creat
 }
 ```
 
-### GET ad <a name="get-ad"></a>
+### GET Ad <a name="get-ad"></a>
 
 This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
 Optional fields (you can request them by passing the fields parameter): description, links to all photos
 
-#### Arguments:
+#### _Arguments_:
 
-| Parameters                          |  type  | description                            | require |
-| ----------------------------------- | :----: | -------------------------------------- | :-----: |
+| Parameters                          |   type   | description                            | require |
+| ----------------------------------- | :------: | -------------------------------------- | :-----: |
 | Required request parameter          |
-| **id**                              | string | uniq param for ad                      |  true   |
+| **id**                              | `string` | uniq param for ad                      | `true`  |
 | Additional query fields parameters: |
-| **fields="description"**            | string | description of ad                      |  false  |
-| **fields="imgURLs"**                | string | all image of ad                        |  false  |
-| **fields="imgURLs,description"**    | string | all image of ad <br /> and description |  false  |
+| **fields="description"**            | `string` | description of ad                      | `false` |
+| **fields="imgURLs"**                | `string` | all image of ad                        | `false` |
+| **fields="imgURLs,description"**    | `string` | all image of ad <br /> and description | `false` |
 
 >position of the attributes passed in the `fields` is not important
 
@@ -191,28 +190,28 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-### GET ads <a name="get-ads"></a>
+### GET Ads <a name="get-ads"></a>
 
 This method has pagination: there are 10 ads on one page;\
 It also sorts: by price (ascending / descending) and by creation date (ascending/descending);\
 And returns: response satus code 200 and json object with fields: ad name, link to the main image (first in the list), price.
 
-#### Arguments:
+#### _Arguments_:
 
-| Query  parameters                 |  type  | description                                           | require |
-| --------------------------------- | :----: | ----------------------------------------------------- | :-----: |
-| Required parameters:              |        |                                                       |         |
-| **page**                          | string | number of  page                                       |  true   |
-| One of these parameters:          |        |                                                       |         |
-| **sort="byPriceAsс"**             | string | sorts by price ascending                              |  true   |
-| **sort="byDateAsc"**              | string | sorts by date ascending                               |  true   |
-| **sort="byPriceDesc"**            | string | sorts by price descending                             |  true   |
-| **sort="byDateDesc"**             | string | sorts by date  descending                             |  true   |
-| Additional parameters:            |        |                                                       |         |
-| **sort="byPriceAsс,byDateAsc"**   | string | sorts by price ascendin and<br />by date ascending    |  false  |
-| **sort="byPriceDesc,byDateDesc"** | string | sorts by price descending and<br />by date descending |  false  |
-| **sort="byPriceAsс,byDateDesc"**  | string | sorts by price ascendin and<br />by date descending   |  false  |
-| **sort="byPriceDesc,byDateAsc"**  | string | sorts by price descending and<br />by date ascending  |  false  |
+| Query  parameters                 |   type   | description                                           | require |
+| --------------------------------- | :------: | ----------------------------------------------------- | :-----: |
+| Required parameters:              |          |                                                       |         |
+| **page**                          | `string` | number of  page                                       | `true`  |
+| One of these parameters:          |          |                                                       |         |
+| **sort="byPriceAsс"**             | `string` | sorts by price ascending                              | `true`  |
+| **sort="byDateAsc"**              | `string` | sorts by date ascending                               | `true`  |
+| **sort="byPriceDesc"**            | `string` | sorts by price descending                             | `true`  |
+| **sort="byDateDesc"**             | `string` | sorts by date  descending                             | `true`  |
+| Additional parameters:            |          |                                                       |         |
+| **sort="byPriceAsс,byDateAsc"**   | `string` | sorts by price ascendin and<br />by date ascending    | `false` |
+| **sort="byPriceDesc,byDateDesc"** | `string` | sorts by price descending and<br />by date descending | `false` |
+| **sort="byPriceAsс,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
+| **sort="byPriceDesc,byDateAsc"**  | `string` | sorts by price descending and<br />by date ascending  | `false` |
 
 >position of the attributes passed in the query request is not important.
 
