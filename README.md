@@ -101,7 +101,7 @@ returns response satus code 201, and a json object which contains an id of creat
 This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
 Optional fields (you can request them by passing the fields parameter): description, links to all photos
 
-### Arguments:
+#### Arguments:
 
 | Paraments                        |  type  | description                            | require |
 | -------------------------------- | :----: | -------------------------------------- | :-----: |
@@ -111,6 +111,8 @@ Optional fields (you can request them by passing the fields parameter): descript
 | **fields="description"**         | string | description of ad                      |  false  |
 | **fields="imgURLs"**             | string | all image of ad                        |  false  |
 | **fields="imgURLs,description"** | string | all image of ad <br /> and description |  false  |
+
+>position of the attributes passed in the `fields` is not important
 
 #### _Examples_:
 
@@ -156,8 +158,6 @@ returns response satus code 200, and a json object which contains a title, price
 
 4. GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
 
->position of the attributes passed in the `fields` is not important
-
 returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad
 
 ```json
@@ -174,6 +174,30 @@ returns response satus code 200, and a json object which contains a title, price
 ```
 
 ### GET ads
-### Arguments:
+
+This method has pagination: there are 10 ads on one page;\
+It also sorts: by price (ascending / descending) and by creation date (ascending/descending);\
+And returns: response satus code 200 and json object with fields: ad name, link to the main image (first in the list), price.
+
+#### Arguments:
+
+| Paraments                         |  type  | description                                           | require |
+| --------------------------------- | :----: | ----------------------------------------------------- | :-----: |
+| Required parameters:              |        |                                                       |         |
+| **page**                          | string | number of  page                                       |  true   |
+| One of these parameters           |        |                                                       |         |
+| **sort="byPriceAsс"**             | string | sorts by price ascending                              |  true   |
+| **sort="byDateAsc"**              | string | sorts by date ascending                               |  true   |
+| **sort="byPriceDesc"**            | string | sorts by price descending                             |  true   |
+| **sort="byDateDesc"**             | string | sorts by date  descending                             |  true   |
+| Additional fields:                |        |                                                       |         |
+| **sort="byPriceAsс,byDateAsc"**   | string | sorts by price ascendin and<br />by date ascending    |  false  |
+| **sort="byPriceDesc,byDateDesc"** | string | sorts by price descending and<br />by date descending |  false  |
+| **sort="byPriceAsс,byDateDesc"**  | string | sorts by price ascendin and<br />by date descending   |  false  |
+| **sort="byPriceDesc,byDateAsc"**  | string | sorts by price descending and<br />by date ascending  |  false  |
+
+>position of the attributes passed in the `sort` is not important
+
 #### _Examples_:
+
 
