@@ -22,9 +22,10 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 -   Nodemon
 
 ## API Methods
+
 ### POST ad
 
-Create an ad
+Create an ad and returns response satus code 201, and a json object which contains an id of created ad
 
 #### Arguments:
 
@@ -35,6 +36,8 @@ Create an ad
 | **price**       |      number      | price of ad       | price > 0                                                                     |  true   |
 | **imgURLs**     | Array of strings | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method |  true   |
 
+ >Automatically creates an id and date in ISO 8601 format
+ 
 #### _Examples_:
 
 POST `api/ad`
@@ -56,7 +59,7 @@ returns response satus code 201, and a json object which contains an id of creat
 }
 ```
 
-### GET api/ad
+### GET ad
 
 Returns ad
 
