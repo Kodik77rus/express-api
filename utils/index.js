@@ -1,3 +1,4 @@
+const { VALID_QUERY_REQ_SORT, VALID_QUERY_GET_AD } = require('../constants')
 
 exports.shemaArrayValidator = (arr) => {
   return arr.length > 0 && arr.length < 4 && Array.isArray(arr)
@@ -21,8 +22,8 @@ exports.querySortValidator = (query) => {
       if (
         keys.length === 2 &&
         keys[0] !== keys[1] &&
-        isСontains(constants.VALID_QUERY_REQ_SORT, keys[0]) &&
-        isСontains(constants.VALID_QUERY_REQ_SORT, keys[1])
+        isСontains(VALID_QUERY_REQ_SORT, keys[0]) &&
+        isСontains(VALID_QUERY_REQ_SORT, keys[1])
       ) {
         if (isСontains(keys[0], 'Price') && !(isСontains(keys[1], 'Price'))) {
           return {
@@ -42,7 +43,7 @@ exports.querySortValidator = (query) => {
       }
     } else if (
       !(isСontains(query.sort, ',')) &&
-      isСontains(constants.VALID_QUERY_REQ_SORT, query.sort)
+      isСontains(VALID_QUERY_REQ_SORT, query.sort)
     ) {
       if (isСontains(query.sort, 'Price')) {
         return {
@@ -66,8 +67,8 @@ exports.queryAdValidator = (query) => {
     if (query.query) {
       const key = query.query.fields.split(',')
       if (key.length === 2 &&
-        isСontains(constants.VALID_QUERY_GET_AD, key[0]) &&
-        isСontains(constants.VALID_QUERY_GET_AD, key[1])
+        isСontains(VALID_QUERY_GET_AD, key[0]) &&
+        isСontains(VALID_QUERY_GET_AD, key[1])
       ) {
         return {
           title: 1,
@@ -78,7 +79,7 @@ exports.queryAdValidator = (query) => {
         }
       } else if (
         key.length === 1 &&
-        isСontains(constants.VALID_QUERY_GET_AD, key[0])
+        isСontains(VALID_QUERY_GET_AD, key[0])
       ) {
         if (isСontains(key[0], 'description')) {
           return {

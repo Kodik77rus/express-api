@@ -66,15 +66,15 @@ response status code.
 
 #### Arguments:
 
-| Parameters      |       type       | description       | validation                                                                    | require |
+| Request Body    |       type       | description       | validation                                                                    | require |
 | --------------- | :--------------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
 | **title**       |      string      | name of  ad       | max length 200 symbols                                                        |  true   |
 | **description** |      string      | description of ad | max length 1000 symbols                                                       |  true   |
 | **price**       |      number      | price of ad       | price > 0                                                                     |  true   |
 | **imgURLs**     | Array of strings | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method |  true   |
 
- >Automatically creates an id and date in ISO 8601 format
- 
+>Automatically creates an id and date in ISO 8601 format
+
 #### _Example_:
 
 POST `api/ad`
@@ -103,14 +103,14 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 #### Arguments:
 
-| Parameters                        |  type  | description                            | require |
-| -------------------------------- | :----: | -------------------------------------- | :-----: |
-| Required parameter               |
-| **id**                           | string | uniq param for ad                      |  true   |
-| Additional fields parameters:    |
-| **fields="description"**         | string | description of ad                      |  false  |
-| **fields="imgURLs"**             | string | all image of ad                        |  false  |
-| **fields="imgURLs,description"** | string | all image of ad <br /> and description |  false  |
+| Parameters                          |  type  | description                            | require |
+| ----------------------------------- | :----: | -------------------------------------- | :-----: |
+| Required request parameter          |
+| **id**                              | string | uniq param for ad                      |  true   |
+| Additional query fields parameters: |
+| **fields="description"**            | string | description of ad                      |  false  |
+| **fields="imgURLs"**                | string | all image of ad                        |  false  |
+| **fields="imgURLs,description"**    | string | all image of ad <br /> and description |  false  |
 
 >position of the attributes passed in the `fields` is not important
 
@@ -181,16 +181,16 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 #### Arguments:
 
-| Parameters                        |  type  | description                                           | require |
+| Query  parameters                 |  type  | description                                           | require |
 | --------------------------------- | :----: | ----------------------------------------------------- | :-----: |
 | Required parameters:              |        |                                                       |         |
 | **page**                          | string | number of  page                                       |  true   |
-| One of these parameters           |        |                                                       |         |
+| One of these parameters:          |        |                                                       |         |
 | **sort="byPriceAsс"**             | string | sorts by price ascending                              |  true   |
 | **sort="byDateAsc"**              | string | sorts by date ascending                               |  true   |
 | **sort="byPriceDesc"**            | string | sorts by price descending                             |  true   |
 | **sort="byDateDesc"**             | string | sorts by date  descending                             |  true   |
-| Additional fields:                |        |                                                       |         |
+| Additional parameters:            |        |                                                       |         |
 | **sort="byPriceAsс,byDateAsc"**   | string | sorts by price ascendin and<br />by date ascending    |  false  |
 | **sort="byPriceDesc,byDateDesc"** | string | sorts by price descending and<br />by date descending |  false  |
 | **sort="byPriceAsс,byDateDesc"**  | string | sorts by price ascendin and<br />by date descending   |  false  |
