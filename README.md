@@ -83,12 +83,12 @@ response status code.
 
 #### _Arguments_:
 
-| Request Body    |        type        | description       | validation                                                                    | require |
-| --------------- | :----------------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
-| **title**       |      `string`      | name of ad        | max length 200 symbols                                                        | `true`  |
-| **description** |      `string`      | description of ad | max length 1000 symbols                                                       | `true`  |
-| **price**       |      `number`      | price of ad       | price > 0                                                                     | `true`  |
-| **imgURLs**     | `Array of strings` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
+| Request Body    |    type    | description       | validation                                                                    | require |
+| --------------- | :--------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
+| **title**       |  `string`  | name of ad        | max length 200 symbols                                                        | `true`  |
+| **description** |  `string`  | description of ad | max length 1000 symbols                                                       | `true`  |
+| **price**       |  `number`  | price of ad       | price > 0                                                                     | `true`  |
+| **imgURLs**     | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
 
 >Automatically creates an id and date in ISO 8601 format.
 
@@ -259,7 +259,7 @@ returns response satus code 200, and page (sortred array of object by price asce
 
 #### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
 
-return 
+returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
 
 ```json
 [
