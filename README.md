@@ -3,21 +3,23 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
--  [Overview <a name="overview"></a>](#overview-)
-- [About stack <a name="about-stack"></a>](#about-stack-)
-  - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
-  - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
-  - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
-- [API Methods <a name="api-methods"></a>](#api-methods-)
-  - [POST Ad <a name="ad post-ad"></a>](#post-)
-    - [_Arguments_](#arguments)
-    - [_Example_](#example)
-  - [GET Ad <a name="get-ad"></a>](#get-ad-)
-    - [_Arguments_](#arguments-1)
-    - [_Examples_:](#examples)
-  - [GET Ads <a name="get-ads"></a>](#get-ads-)
-    - [_Arguments_:](#arguments-2)
-    - [_Examples_:](#examples-1)
+- [firstApi](#firstapi)
+  - [Navigation](#navigation)
+  - [Overview <a name="overview"></a>](#overview-)
+  - [About stack <a name="about-stack"></a>](#about-stack-)
+    - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
+    - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
+    - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+  - [API Methods <a name="api-methods"></a>](#api-methods-)
+    - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
+      - [_Arguments_:](#arguments)
+      - [_Example_:](#example)
+    - [GET Ad <a name="get-ad"></a>](#get-ad-)
+      - [_Arguments_:](#arguments-1)
+      - [_Examples_:](#examples)
+    - [GET Ads <a name="get-ads"></a>](#get-ads-)
+      - [_Arguments_:](#arguments-2)
+      - [_Examples_:](#examples-1)
 
 ## Overview <a name="overview"></a>
 
@@ -83,14 +85,14 @@ response status code.
 
 #### _Arguments_:
 
-| Request Body    |       type       | description       | validation                                                                    | require |
-| --------------- | :--------------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
-| **title**       |      string      | name of  ad       | max length 200 symbols                                                        |  true   |
-| **description** |      string      | description of ad | max length 1000 symbols                                                       |  true   |
-| **price**       |      number      | price of ad       | price > 0                                                                     |  true   |
-| **imgURLs**     | Array of strings | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method |  true   |
+| Request Body    |        type        | description       | validation                                                                    | require |
+| --------------- | :----------------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
+| **title**       |      `string`      | name of ad        | max length 200 symbols                                                        | `true`  |
+| **description** |      `string`      | description of ad | max length 1000 symbols                                                       | `true`  |
+| **price**       |      `number`      | price of ad       | price > 0                                                                     | `true`  |
+| **imgURLs**     | `Array of strings` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
 
->Automatically creates an id and date in ISO 8601 format
+>Automatically creates an id and date in ISO 8601 format.
 
 #### _Example_:
 
@@ -105,7 +107,7 @@ POST `api/ad`
 }
 ```
 
-returns response satus code 201, and a json object which contains an id of created ad
+returns response satus code 201, and a json object which contains an id of created ad.
 
 ```json
 {
@@ -116,15 +118,15 @@ returns response satus code 201, and a json object which contains an id of creat
 ### GET Ad <a name="get-ad"></a>
 
 This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
-Optional fields (you can request them by passing the fields parameter): description, links to all photos
+Optional fields (you can request them by passing the fields parameter): description, links to all photos.
 
 #### _Arguments_:
 
 | Parameters                          |   type   | description                            | require |
 | ----------------------------------- | :------: | -------------------------------------- | :-----: |
-| Required request parameter          |
+| ***Required request parameter ***         |
 | **id**                              | `string` | uniq param for ad                      | `true`  |
-| Additional query fields parameters: |
+| ***Additional query fields parameters:*** |
 | **fields="description"**            | `string` | description of ad                      | `false` |
 | **fields="imgURLs"**                | `string` | all image of ad                        | `false` |
 | **fields="imgURLs,description"**    | `string` | all image of ad <br /> and description | `false` |
@@ -135,7 +137,7 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 1. GET `api/ad/604a990f7c6dba`
 
-returns response satus code 200, and a json object which contains a title, price, and main image url of ad
+returns response satus code 200, and a json object which contains a title, price, and main image url of ad.
 
 ```json
 {
@@ -147,7 +149,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 2. GET `api/ad/604a990f7c6dba?fields=imgURLs`
 
-returns response satus code 200, and a json object which contains a title, price, and all images urls of ad
+returns response satus code 200, and a json object which contains a title, price, and all images urls of ad.
 
 ```json
 {
@@ -163,7 +165,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 3. GET `api/ad/604a990f7c6dba?fields=description`
 
-returns response satus code 200, and a json object which contains a title, price and description of ad
+returns response satus code 200, and a json object which contains a title, price and description of ad.
 
 ```json
 {
@@ -175,7 +177,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 4. GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
 
-returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad
+returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad.
 
 ```json
 {
@@ -200,14 +202,14 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 | Query  parameters                 |   type   | description                                           | require |
 | --------------------------------- | :------: | ----------------------------------------------------- | :-----: |
-| Required parameters:              |          |                                                       |         |
+| ***Required parameters:***        |          |                                                       |         |
 | **page**                          | `string` | number of  page                                       | `true`  |
-| One of these parameters:          |          |                                                       |         |
+| ***One of these parameters:***    |          |                                                       |         |
 | **sort="byPriceAsс"**             | `string` | sorts by price ascending                              | `true`  |
 | **sort="byDateAsc"**              | `string` | sorts by date ascending                               | `true`  |
 | **sort="byPriceDesc"**            | `string` | sorts by price descending                             | `true`  |
 | **sort="byDateDesc"**             | `string` | sorts by date  descending                             | `true`  |
-| Additional parameters:            |          |                                                       |         |
+| ***Additional parameters:  ***    |          |                                                       |         |
 | **sort="byPriceAsс,byDateAsc"**   | `string` | sorts by price ascendin and<br />by date ascending    | `false` |
 | **sort="byPriceDesc,byDateDesc"** | `string` | sorts by price descending and<br />by date descending | `false` |
 | **sort="byPriceAsс,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
