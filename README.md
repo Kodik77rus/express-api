@@ -253,8 +253,8 @@ returns response satus code 200, and page (sortred array of object by price asce
     "price": 567,
     "mainUrl": "http://dfgdsfgdsfg"
   },
-///and other 4
 ]
+// and other 4
 ```
 
 #### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
@@ -303,6 +303,7 @@ return
     "price": 567,
     "mainUrl": "http://dfgdsfgdsfg"
   },
+]
 
-  //and other 2
+// and other 2 
 ```
