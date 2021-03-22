@@ -52,6 +52,7 @@ const ad = new Schema({
     }
   }
 })
+```
 
 ## API Methods
 
