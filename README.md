@@ -2,12 +2,17 @@
 
 This is pet service for storing and submitting ads.
 
-## Overview 
+## Navigation
+1. [Overview](#overview)
+1. [About stack](#about-stack)
+2. [API Methods](#api-methods)
+
+## Overview <a name="overview"></a>
 
 This is my implementation of this [task](https://github.com/avito-tech/adv-backend-trainee-assignment/blob/main/README.md).
 The API is organized around REST. API has predictable resource-oriented URLs, all endpoints are validated and returns JSON-responses, uses standard HTTP response codes.
 
-## About stack:
+## About stack <a name="about-stack"></a>
 
 ### This project based on:
 
@@ -57,7 +62,7 @@ const ad = new Schema({
 })
 ```
 
-## API Methods
+## API Methods <a name="api-methods"></a>
 
 ### POST ad
 
