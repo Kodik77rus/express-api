@@ -76,7 +76,7 @@ Returns ad
 
 #### _Examples_:
 
-GET `api/ad/604a990f7c6dba`
+1. GET `api/ad/604a990f7c6dba`
 
 returns response satus code 200, and a json object which contains a title, price, and main image url of ad
 
@@ -88,7 +88,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-GET `api/ad/604a990f7c6dba?fields=imgURLs`
+2. GET `api/ad/604a990f7c6dba?fields=imgURLs`
 
 returns response satus code 200, and a json object which contains a title, price, and all images urls of ad
 
@@ -104,7 +104,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-GET `api/ad/604a990f7c6dba?fields=description`
+3. GET `api/ad/604a990f7c6dba?fields=description`
 
 returns response satus code 200, and a json object which contains a title, price and description of ad
 
@@ -116,7 +116,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
+4. GET `api/ad/604a990f7c6dba?fields=imgURLs,description`
 
 >position of the attributes passed in the `fields` is not important
 
