@@ -3,8 +3,6 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
-- [firstApi](#firstapi)
-  - [Navigation](#navigation)
   - [Overview <a name="overview"></a>](#overview-)
   - [About stack <a name="about-stack"></a>](#about-stack-)
     - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
@@ -14,19 +12,12 @@ This is pet service for storing and submitting ads.
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [_Arguments_:](#arguments)
       - [_Example_:](#example)
-      - [POST `api/ad`](#post-apiad)
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
       - [_Arguments_:](#arguments-1)
       - [_Examples_:](#examples)
-      - [1. GET `/api/ad/604a990f7c6dba`](#1-get-apiad604a990f7c6dba)
-      - [2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-apiad604a990f7c6dbafieldsimgurls)
-      - [3. GET `/api/ad/604a990f7c6dba?fields=description`](#3-get-apiad604a990f7c6dbafieldsdescription)
-      - [4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-apiad604a990f7c6dbafieldsimgurlsdescription)
     - [GET Ads <a name="get-ads"></a>](#get-ads-)
       - [_Arguments_:](#arguments-2)
       - [_Examples_:](#examples-1)
-      - [1. GET `/api/ads?page=1&sort=byPriceAsс`](#1-get-apiadspage1sortbypriceasс)
-      - [2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-apiadspage2sortbypricedescbydateasc)
 
 ## Overview <a name="overview"></a>
 
