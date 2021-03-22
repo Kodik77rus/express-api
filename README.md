@@ -61,7 +61,8 @@ const ad = new Schema({
 
 ### POST ad
 
-Create an ad and returns response satus code 201, and a json object which contains an id of created ad
+This method takes: title, description, links images, price, and returns the ID of the created ad and \
+response status code.
 
 #### Arguments:
 
@@ -97,7 +98,8 @@ returns response satus code 201, and a json object which contains an id of creat
 
 ### GET ad
 
-Returns ad
+This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
+Optional fields (you can request them by passing the fields parameter): description, links to all photos
 
 ### Arguments:
 
