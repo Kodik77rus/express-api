@@ -218,4 +218,3 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 #### _Examples_:
 
 1. GET `api/ads?page=1&sort=byPriceAsс`
-
