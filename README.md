@@ -122,14 +122,14 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 #### _Arguments_:
 
-| Parameters                          |   type   | description                            | require |
-| ----------------------------------- | :------: | -------------------------------------- | :-----: |
-| ***Required request parameter ***         |
-| **id**                              | `string` | uniq param for ad                      | `true`  |
+| Parameters                                |   type   | description                            | require |
+| ----------------------------------------- | :------: | -------------------------------------- | :-----: |
+| ***Required request parameter***          |          |                                        |         |
+| **id**                                    | `string` | uniq param for ad                      | `true`  |
 | ***Additional query fields parameters:*** |
-| **fields="description"**            | `string` | description of ad                      | `false` |
-| **fields="imgURLs"**                | `string` | all image of ad                        | `false` |
-| **fields="imgURLs,description"**    | `string` | all image of ad <br /> and description | `false` |
+| **fields="description"**                  | `string` | description of ad                      | `false` |
+| **fields="imgURLs"**                      | `string` | all image of ad                        | `false` |
+| **fields="imgURLs,description"**          | `string` | all image of ad <br /> and description | `false` |
 
 >position of the attributes passed in the `fields` is not important
 
@@ -209,7 +209,7 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 | **sort="byDateAsc"**              | `string` | sorts by date ascending                               | `true`  |
 | **sort="byPriceDesc"**            | `string` | sorts by price descending                             | `true`  |
 | **sort="byDateDesc"**             | `string` | sorts by date  descending                             | `true`  |
-| ***Additional parameters:  ***    |          |                                                       |         |
+| ***Additional parameters:***      |          |                                                       |         |
 | **sort="byPriceAsс,byDateAsc"**   | `string` | sorts by price ascendin and<br />by date ascending    | `false` |
 | **sort="byPriceDesc,byDateDesc"** | `string` | sorts by price descending and<br />by date descending | `false` |
 | **sort="byPriceAsс,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
