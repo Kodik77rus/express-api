@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const adRouter = require('./routes/ad')
+const { notFoundError } = require('./controllers/ad')
 const { URL_FOR_CONNECT_TO_DB } = require('./constants')
 
 const PORT = process.env.PORT || 3000
@@ -8,8 +9,8 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 app.use(express.json())
-
 app.use('/api', adRouter)
+app.use(notFoundError)
 
 const start = async () => {
   try {

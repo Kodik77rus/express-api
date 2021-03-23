@@ -41,3 +41,5 @@ exports.getAd = async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 }
+
+exports.notFoundError = (req, res) => res.status(404).json("Not Found")
