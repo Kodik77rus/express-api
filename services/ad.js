@@ -33,7 +33,7 @@ exports.getAd = async (ad) => {
     if (isValid) {
       return await Ad.findById(ad.paramId, isValid)
     } else {
-      throw new Error('Bad request')
+      throw new Error(DICTIONARY.errors.badRequest)
     }
   } catch (err) {
     return err
