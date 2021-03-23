@@ -259,7 +259,7 @@ returns response satus code 200, and page (sortred array of object by price asce
 
 #### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
 
-returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
+returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, each object has contains a title, price, link to the main image (first in the list) of ad.
 
 ```json
 [
