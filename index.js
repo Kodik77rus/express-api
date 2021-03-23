@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const adRouter = require('./routes/ad')
-const { notFoundError } = require('./controllers/ad')
+const { notFoundError } = require('./utils/index')
 const { URL_FOR_CONNECT_TO_DB } = require('./constants')
 
 const PORT = process.env.PORT || 3000

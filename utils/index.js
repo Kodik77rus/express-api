@@ -1,5 +1,9 @@
 const { VALID_QUERY_REQ_SORT, VALID_QUERY_GET_AD } = require('../constants')
 
+exports.notFoundError = (_, res) => res.status(404).json("Not Found")
+
+exports.serverError = (err) => res.status(404).json({massage: err})
+
 exports.shemaArrayValidator = (arr) => {
   return arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 }
