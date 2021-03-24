@@ -19,7 +19,7 @@ exports.shemaUrlValidator = (urls) => {
 const isСontains = (initialValue, checkValue) => initialValue.includes(checkValue)
 
 exports.querySortValidator = (query) => {
-  if (query.sort && +query.page > 0) {
+  if (typeof (query.sort) === 'string' && +query.page > 0) {
     if (isСontains(query.sort, ',')) {
       const keys = query.sort.split(',')
       if (
@@ -29,15 +29,15 @@ exports.querySortValidator = (query) => {
         isСontains(VALID_QUERY_REQ_SORT, keys[1])
       ) {
         if (isСontains(keys[0], 'Price') && !(isСontains(keys[1], 'Price'))) {
-          return {
-            price: isСontains(keys[0], 'Asс') ? 1 : -1,
-            date: isСontains(keys[1], 'Asс') ? 1 : -1
-          }
+          return ({
+            price: isСontains(keys[0], 'Asc') ? 1 : -1,
+            date: isСontains(keys[1], 'Asc') ? 1 : -1
+          })
         } else if (isСontains(keys[0], 'Date') && !(isСontains(keys[1], 'Date'))) {
-          return {
-            price: isСontains(keys[1], 'Asс') ? 1 : -1,
-            date: isСontains(keys[0], 'Asс') ? 1 : -1
-          }
+          return ({
+            price: isСontains(keys[1], 'Asc') ? 1 : -1,
+            date: isСontains(keys[0], 'Asc') ? 1 : -1
+          })
         } else {
           return false
         }
