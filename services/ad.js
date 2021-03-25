@@ -1,6 +1,6 @@
 const Ad = require('../model/ad')
 const { querySortValidator, queryAdValidator } = require('../utils')
-const { PAGE_SIZE, DICTIONARY } = require('../constants')
+const { PAGE_SIZE, DICTIONARY, PARSED_OBJECTS } = require('../constants')
 
 exports.createAd = async (ad) => {
   try {
@@ -27,11 +27,18 @@ exports.getAds = async (query) => {
   }
 }
 
-exports.getAd = async (ad) => {
+exports.getAd = async (adId, query) => {
   try {
-    const isValid = queryAdValidator(ad)
-    if (isValid) {
-      return await Ad.findById(ad.paramId, isValid)
+    if (Object.keys(query).length === 0) {
+      const ad = await Ad.findById(adId, PARSED_OBJECTS.withoutParam)
+      return ad
+    } else if (query.fields && Object.keys(query).length === 1) {
+      const res = queryAdValidator(query.fields)
+      if (res) {
+        return await Ad.findById(adId, res)
+      } else {
+        throw new Error(DICTIONARY.errors.badRequest)
+      }
     } else {
       throw new Error(DICTIONARY.errors.badRequest)
     }

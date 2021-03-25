@@ -13,6 +13,34 @@ exports.VALID_QUERY_GET_AD = [
   'description', 'imgURLs'
 ]
 
+exports.PARSED_OBJECTS = {
+  withoutParam: {
+    title: 1,
+    price: 1,
+    mainUrl: { $first: "$imgURLs" },
+    _id: 0
+  },
+  withTwoParam: {
+    title: 1,
+    price: 1,
+    description: 1,
+    imgURLs: 1,
+    _id: 0
+  },
+  withDescription: {
+    title: 1,
+    price: 1,
+    description: 1,
+    _id: 0
+  },
+  withImgURLs: {
+    title: 1,
+    price: 1,
+    imgURLs: 1,
+    _id: 0
+  }
+}
+
 exports.DICTIONARY = {
   schema: {
     title: 'Ad title required',

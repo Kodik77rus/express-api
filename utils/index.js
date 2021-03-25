@@ -1,118 +1,77 @@
-const { VALID_QUERY_REQ_SORT, VALID_QUERY_GET_AD, URL_REGEX } = require('../constants')
+const {
+  VALID_QUERY_REQ_SORT,
+  VALID_QUERY_GET_AD, URL_REGEX,
+  PARSED_OBJECTS
+} = require('../constants')
 
-exports.notFoundError = (_, res) => res.status(404).json("Not Found")
+exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
-exports.serverError = (err) => res.status(500).json({ massage: err })
-
-exports.shemaArrayValidator = (arr) => {
-  return arr.length > 0 && arr.length < 4 && Array.isArray(arr)
+exports.shemaUrlValidator = urls => {
+  if (urls.map(u => URL_REGEX.test(u)).find(u => u === false) === undefined) { return true } else { return false }
 }
 
-exports.shemaUrlValidator = (urls) => {
-  if (urls.map(u => URL_REGEX.test(u)).find(u => u === false) === undefined) {
-    return true
-  } else {
-    return false
-  }
-}
-
-const isСontains = (initialValue, checkValue) => initialValue.includes(checkValue)
-
-exports.querySortValidator = (query) => {
+exports.querySortValidator = query => {
   if (typeof (query.sort) === 'string' && +query.page > 0) {
-    if (isСontains(query.sort, ',')) {
-      const keys = query.sort.split(',')
-      if (
-        keys.length === 2 &&
-        keys[0] !== keys[1] &&
-        isСontains(VALID_QUERY_REQ_SORT, keys[0]) &&
-        isСontains(VALID_QUERY_REQ_SORT, keys[1])
-      ) {
-        if (isСontains(keys[0], 'Price') && !(isСontains(keys[1], 'Price'))) {
-          return ({
-            price: isСontains(keys[0], 'Asc') ? 1 : -1,
-            date: isСontains(keys[1], 'Asc') ? 1 : -1
-          })
-        } else if (isСontains(keys[0], 'Date') && !(isСontains(keys[1], 'Date'))) {
-          return ({
-            price: isСontains(keys[1], 'Asc') ? 1 : -1,
-            date: isСontains(keys[0], 'Asc') ? 1 : -1
-          })
-        } else {
-          return false
-        }
-      } else {
-        return false
+    const countParam = isValidQuery(query.sort, VALID_QUERY_REQ_SORT)
+    if (countParam) {
+      return sortParser(countParam, query.sort)
+    } else { return false }
+  } else { return false }
+}
+
+exports.queryAdValidator = query => {
+  if (typeof query === 'string') {
+    const countParam = isValidQuery(query, VALID_QUERY_GET_AD)
+    if (countParam) {
+      return adParser(countParam, query)
+    } else { return false }
+  } else { return false }
+}
+
+exports.notFoundError = (_, res) => res.status(404).json("Not Found1")
+
+exports.serverError = err => res.status(500).json({ massage: err })
+
+function isСontains(initialValue, checkValue) { return initialValue.includes(checkValue) }
+
+function isValidQuery(query, dictionary) {
+  const result = query.split(',').filter(p => isСontains(dictionary, p))
+  if (result.length > 0 && result.length <= 2) {
+    for (let i = 0; i <= result.length - 1; i++) {
+      let elem = result[i]
+      for (let j = i + 1; j <= result.length - i - 1; j++) {
+        if (elem === result[j]) { return false }
       }
-    } else if (
-      !(isСontains(query.sort, ',')) &&
-      isСontains(VALID_QUERY_REQ_SORT, query.sort)
-    ) {
-      if (isСontains(query.sort, 'Price')) {
-        return {
-          price: isСontains(query.sort, 'Asc') ? 1 : -1
-        }
-      } else {
-        return {
-          date: isСontains(query.sort, 'Asc') ? 1 : -1
-        }
-      }
-    } else {
-      return false
     }
-  } else {
-    return false
+    return result.length
+  } else { return false }
+}
+
+function adParser(countParam, query) {
+  const keys = query.split(',')
+  if (countParam === 2) {
+    return PARSED_OBJECTS.withTwoParam
+  } else if (countParam === 1 && isСontains(keys[0], 'description')) {
+    return PARSED_OBJECTS.withDescription
+  } else if (countParam === 1 && isСontains(keys[0], 'imgURLs')) {
+    return PARSED_OBJECTS.withImgURLs
   }
 }
 
-exports.queryAdValidator = (query) => {
-  if (query.paramId && Object.keys(query.query).length === 1) {
-    if (query.query) {
-      const key = query.query.fields.split(',')
-      if (key.length === 2 &&
-        isСontains(VALID_QUERY_GET_AD, key[0]) &&
-        isСontains(VALID_QUERY_GET_AD, key[1])
-      ) {
-        return {
-          title: 1,
-          price: 1,
-          description: 1,
-          imgURLs: 1,
-          _id: 0
-        }
-      } else if (
-        key.length === 1 &&
-        isСontains(VALID_QUERY_GET_AD, key[0])
-      ) {
-        if (isСontains(key[0], 'description')) {
-          return {
-            title: 1,
-            price: 1,
-            description: 1,
-            _id: 0
-          }
-        } else {
-          return {
-            title: 1,
-            price: 1,
-            imgURLs: 1,
-            _id: 0
-          }
-        }
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-  } else if (query.paramId && Object.keys(query.query).length === 0) {
+function sortParser(countParam, query) {
+  if (countParam === 2 && query === 'Price') {
     return {
-      title: 1,
-      price: 1,
-      mainUrl: { $first: "$imgURLs" },
-      _id: 0
+      price: isСontains(keys[0], 'Asc') ? 1 : -1,
+      date: isСontains(keys[1], 'Asc') ? 1 : -1
     }
+  } else if (countParam === 2) {
+    return {
+      price: isСontains(keys[1], 'Asc') ? 1 : -1,
+      date: isСontains(keys[0], 'Asc') ? 1 : -1
+    }
+  } else if (countParam === 1, query === 'Price') {
+    return { date: isСontains(keys[0], 'Asc') ? 1 : -1 }
   } else {
-    return false
+    return { date: isСontains(keys[0], 'Asc') ? 1 : -1 }
   }
 }

@@ -44,7 +44,7 @@ describe('Validation  for GET /ads endpoint', () => {
     third: { page: '-1', sort: 'byPriceDesc,byDateAsc' },
     fourth: { page: '2', sort: 'test_1,test_2' },
     fifth: { page: '2', sort: 'byDateAsc,byDateAsc' },
-    sixth: { page: '1', sort: 'byPriceDesc,byDateAsc' }
+    sixth: { page: '1', sort: 'byPriceAsc,byDateDesc' }
   }
 
   const sixthRez = { price: -1, date: 1 }
@@ -76,12 +76,11 @@ describe('Validation  for GET /ads endpoint', () => {
 
 describe('Validation for GET /ad endpoint', () => {
   const testQueries = {
-    first: { test_1: 2, test_2: 'test' },
-    second: { id: 2, fields: 54 },
-    third: { id: '604a990f7c6dba', fields: 'test_2,test_1' },
-    fourth: { id: '604a990f7c6dba', fields: 'imgURLs,imgURLs' },
-    fifth: { id: '604a990f7c6dba', fields: 'imgURLs,description' },
-    sixth: { page: '1', sort: 'byPriceDesc,byDateAsc' }
+    first: { test: 'test' },
+    second: { fields: 54 },
+    third: { fields: 'test_2,test_1' },
+    fourth: { fields: 'imgURLs,imgURLs' },
+    fifth: { fields: 'imgURLs,description' },
   }
 
   const sixthRez = {

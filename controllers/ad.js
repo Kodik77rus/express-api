@@ -29,10 +29,7 @@ exports.getAds = async (req, res) => {
 
 exports.getAd = async (req, res) => {
   try {
-    const ad = await adServces.getAd({
-      paramId: req.params.id,
-      query: req.query,
-    })
+    const ad = await adServces.getAd(req.params.id, req.query)
     if (ad.hasOwnProperty('message')) {
       res.status(400).json({ message: ad.message })
     } else {
