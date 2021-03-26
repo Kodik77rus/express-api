@@ -121,7 +121,7 @@ returns response satus code 201, and a json object which contains an id of creat
 
 ### GET Ad <a name="get-ad"></a>
 
-This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
+This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.
 Optional fields (you can request them by passing the fields parameter): description, links to all photos.
 
 #### _Arguments_:
