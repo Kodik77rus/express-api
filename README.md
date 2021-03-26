@@ -79,7 +79,7 @@ const ad = new Schema({
 
 ![serverArc](./img/serverArc.svg?raw=true)
 
-The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client
+The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client.
 ## API Methods <a name="api-methods"></a>
 
 ### POST Ad <a name="ad post-ad"></a>
