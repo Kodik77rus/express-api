@@ -51,7 +51,7 @@ function isValidQuery(query, dictionary) {
 function adParser(countParam, query) {
   const keys = query.split(',')
   if (countParam === 2) {
-    return PARSED_OBJECTS.withTwoParam
+    return PARSED_OBJECTS.withTwoParams
   } else if (countParam === 1 && isСontains(keys[0], 'description')) {
     return PARSED_OBJECTS.withDescription
   } else if (countParam === 1 && isСontains(keys[0], 'imgURLs')) {
@@ -60,7 +60,8 @@ function adParser(countParam, query) {
 }
 
 function sortParser(countParam, query) {
-  if (countParam === 2 && query === 'Price') {
+  const keys = query.split(',')
+  if (countParam === 2 && isСontains(query, 'Price')) {
     return {
       price: isСontains(keys[0], 'Asc') ? 1 : -1,
       date: isСontains(keys[1], 'Asc') ? 1 : -1
@@ -70,8 +71,8 @@ function sortParser(countParam, query) {
       price: isСontains(keys[1], 'Asc') ? 1 : -1,
       date: isСontains(keys[0], 'Asc') ? 1 : -1
     }
-  } else if (countParam === 1, query === 'Price') {
-    return { date: isСontains(keys[0], 'Asc') ? 1 : -1 }
+  } else if (countParam === 1 && isСontains(query, 'Price')) {
+    return { price: isСontains(keys[0], 'Asc') ? 1 : -1 }
   } else {
     return { date: isСontains(keys[0], 'Asc') ? 1 : -1 }
   }

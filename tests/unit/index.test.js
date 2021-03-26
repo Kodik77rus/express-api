@@ -1,9 +1,11 @@
+const { PARSED_OBJECTS } = require('../../constants')
 const {
   shemaArrayValidator,
   shemaUrlValidator,
   querySortValidator,
   queryAdValidator
 } = require('../../utils')
+
 
 describe('Schema arrays validations functions', () => {
   const testArrays = {
@@ -41,13 +43,28 @@ describe('Validation  for GET /ads endpoint', () => {
   const testQueries = {
     first: { test_1: 2, test_2: 'test' },
     second: { page: 2, sort: 54 },
-    third: { page: '-1', sort: 'byPriceDesc,byDateAsc' },
-    fourth: { page: '2', sort: 'test_1,test_2' },
-    fifth: { page: '2', sort: 'byDateAsc,byDateAsc' },
-    sixth: { page: '1', sort: 'byPriceAsc,byDateDesc' }
+    third: { page: '-1', sort: 'test_1,test_2' },
+    fourth: { page: '2', sort: 'byPriceDesc,byDateAsc,byDateAsc' },
+    fifth: { page: '1', sort: 'byDateAsc' },
+    sixth: { page: '1', sort: 'byPriceAsc' },
+    seventh: { page: '1', sort: 'byDateDesc' },
+    eighth: { page: '1', sort: 'byPriceDesc' },
+    ninth: { page: '1', sort: 'byPriceDesc,byDateDesc' },
+    tenth: { page: '1', sort: 'byPriceAsc,byDateAsc' },
+    eleventh: { page: '1', sort: 'byPriceAsc,byDateDesc' },
+    twelfth: { page: '1', sort: 'byPriceDesc,byDateAsc' },
   }
 
-  const sixthRez = { price: -1, date: 1 }
+  const testRes = {
+    fifthRes: { date: 1 },
+    sixthRes: { price: 1 },
+    seventhRes: { date: - 1 },
+    eighthRes: { price: -1, },
+    ninthRes: { price: -1, date: -1 },
+    tenthRes: { price: 1, date: 1 },
+    eleventhRes: { price: 1, date: -1 },
+    twelfthRes: { price: -1, date: 1 }
+  }
 
   test('it should contains keys: page,sort', () => {
     expect(querySortValidator(testQueries.first)).toBeFalsy()
@@ -57,57 +74,78 @@ describe('Validation  for GET /ads endpoint', () => {
     expect(querySortValidator(testQueries.second)).toBeFalsy()
   })
 
-  test('page must be > 0', () => {
+  test('page must be > 0; params in key sort must be: byPriceAsc, byPriceDesc, byDateAsc, byDateDesc', () => {
     expect(querySortValidator(testQueries.third)).toBeFalsy()
   })
 
-  test('params (require min 1; max 2) in key sort must be: byPriceAsc, byPriceDesc, byDateAsc, byDateDesc', () => {
+  test('params (min 1, max 2) in key (sort) must be different', () => {
     expect(querySortValidator(testQueries.fourth)).toBeFalsy()
   })
 
-  test('params in key (sort) must be different', () => {
-    expect(querySortValidator(testQueries.fifth)).toBeFalsy()
+  test('it should be validated 1', () => {
+    expect(querySortValidator(testQueries.fifth)).toEqual(testRes.fifthRes)
   })
 
-  test('it should be validated', () => {
-    expect(querySortValidator(testQueries.sixth)).toEqual(sixthRez)
+  test('it should be validated 2', () => {
+    expect(querySortValidator(testQueries.sixth)).toEqual(testRes.sixthRes)
+  })
+
+  test('it should be validated 3', () => {
+    expect(querySortValidator(testQueries.seventh)).toEqual(testRes.seventhRes)
+  })
+
+  test('it should be validated 4', () => {
+    expect(querySortValidator(testQueries.eighth)).toEqual(testRes.eighthRes)
+  })
+
+  test('it should be validated 5', () => {
+    expect(querySortValidator(testQueries.ninth)).toEqual(testRes.ninthRes)
+  })
+
+  test('it should be validated 6', () => {
+    expect(querySortValidator(testQueries.tenth)).toEqual(testRes.tenthRes)
+  })
+
+  test('it should be validated 7', () => {
+    expect(querySortValidator(testQueries.eighth)).toEqual(testRes.eighthRes)
+  })
+
+  test('it should be validated 8', () => {
+    expect(querySortValidator(testQueries.twelfth)).toEqual(testRes.twelfthRes)
   })
 })
 
 describe('Validation for GET /ad endpoint', () => {
   const testQueries = {
-    first: { test: 'test' },
-    second: { fields: 54 },
-    third: { fields: 'test_2,test_1' },
-    fourth: { fields: 'imgURLs,imgURLs' },
-    fifth: { fields: 'imgURLs,description' },
+    first: 54,
+    second: 'test',
+    third: 'imgURLs,description,imgURLs',
+    fourth: 'imgURLs,description',
+    fifth: 'description',
+    sixth: 'imgURLs'
   }
 
-  const sixthRez = {
-    title: 1,
-    price: 1,
-    description: 1,
-    imgURLs: 1,
-    _id: 0
-  }
-
-  test('it should be contains keys: id as required; optionally fields', () => {
+  test('it should be a strings', () => {
     expect(queryAdValidator(testQueries.first)).toBeFalsy()
   })
 
-  test('keys should a strings', () => {
+  test('it should contains imgURLs,description or one of them', () => {
     expect(queryAdValidator(testQueries.second)).toBeFalsy()
   })
 
-  test('fields should contains imgURLs,description or one of them', () => {
+  test('field should contains min 1, max 2 value, values must be different', () => {
     expect(queryAdValidator(testQueries.third)).toBeFalsy()
   })
 
-  test('field should contains different values', () => {
-    expect(queryAdValidator(testQueries.fourth)).toBeFalsy()
+  test('it should be validated 1', () => {
+    expect(queryAdValidator(testQueries.fourth)).toEqual(PARSED_OBJECTS.withTwoParams)
   })
 
-  test('it should be validated', () => {
-    expect(queryAdValidator(testQueries.fifth)).toEqual(sixthRez)
+  test('it should be validated 2', () => {
+    expect(queryAdValidator(testQueries.fifth)).toEqual(PARSED_OBJECTS.withDescription)
+  })
+
+  test('it should be validated 3', () => {
+    expect(queryAdValidator(testQueries.sixth)).toEqual(PARSED_OBJECTS.withImgURLs)
   })
 })

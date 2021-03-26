@@ -14,13 +14,13 @@ exports.VALID_QUERY_GET_AD = [
 ]
 
 exports.PARSED_OBJECTS = {
-  withoutParam: {
+  withoutParams: {
     title: 1,
     price: 1,
     mainUrl: { $first: '$imgURLs' },
     _id: 0
   },
-  withTwoParam: {
+  withTwoParams: {
     title: 1,
     price: 1,
     description: 1,
