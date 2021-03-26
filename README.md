@@ -8,6 +8,7 @@ This is pet service for storing and submitting ads.
     - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
     - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
     - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+  - [Server architecture <a name="server-arc"></a>](#server-arc)
   - [API Methods <a name="api-methods"></a>](#api-methods-)
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [_Arguments_:](#arguments)
@@ -74,6 +75,11 @@ const ad = new Schema({
 })
 ```
 
+## Server architecture  <a name="server-arc"></a>
+
+![serverArc](./img/serverArc.svg?raw=true)
+
+The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client
 ## API Methods <a name="api-methods"></a>
 
 ### POST Ad <a name="ad post-ad"></a>
