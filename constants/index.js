@@ -17,7 +17,7 @@ exports.PARSED_OBJECTS = {
   withoutParam: {
     title: 1,
     price: 1,
-    mainUrl: { $first: "$imgURLs" },
+    mainUrl: { $first: '$imgURLs' },
     _id: 0
   },
   withTwoParam: {

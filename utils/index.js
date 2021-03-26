@@ -1,22 +1,14 @@
 const {
   VALID_QUERY_REQ_SORT,
   VALID_QUERY_GET_AD, URL_REGEX,
-  PARSED_OBJECTS
+  PARSED_OBJECTS,
+  DICTIONARY
 } = require('../constants')
 
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
 exports.shemaUrlValidator = urls => {
   if (urls.map(u => URL_REGEX.test(u)).find(u => u === false) === undefined) { return true } else { return false }
-}
-
-exports.querySortValidator = query => {
-  if (typeof (query.sort) === 'string' && +query.page > 0) {
-    const countParam = isValidQuery(query.sort, VALID_QUERY_REQ_SORT)
-    if (countParam) {
-      return sortParser(countParam, query.sort)
-    } else { return false }
-  } else { return false }
 }
 
 exports.queryAdValidator = query => {
@@ -28,7 +20,16 @@ exports.queryAdValidator = query => {
   } else { return false }
 }
 
-exports.notFoundError = (_, res) => res.status(404).json("Not Found1")
+exports.querySortValidator = query => {
+  if (typeof (query.sort) === 'string' && +query.page > 0) {
+    const countParam = isValidQuery(query.sort, VALID_QUERY_REQ_SORT)
+    if (countParam) {
+      return sortParser(countParam, query.sort)
+    } else { return false }
+  } else { return false }
+}
+
+exports.notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.badRequest)
 
 exports.serverError = err => res.status(500).json({ massage: err })
 
