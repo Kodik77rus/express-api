@@ -3,22 +3,22 @@
 This is pet service for storing and submitting ads.
 
 ## Navigation
-  - [Overview <a name="overview"></a>](#overview-)
-  - [About stack <a name="about-stack"></a>](#about-stack-)
-    - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
-    - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
-    - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
-  - [Server architecture <a name="server-arc"></a>](#server-arc)
-  - [API Methods <a name="api-methods"></a>](#api-methods-)
-    - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
-      - [_Arguments_:](#arguments)
-      - [_Example_:](#example)
-    - [GET Ad <a name="get-ad"></a>](#get-ad-)
-      - [_Arguments_:](#arguments-1)
-      - [_Examples_:](#examples)
-    - [GET Ads <a name="get-ads"></a>](#get-ads-)
-      - [_Arguments_:](#arguments-2)
-      - [_Examples_:](#examples-1)
+- [Overview <a name="overview"></a>](#overview-)
+- [About stack <a name="about-stack"></a>](#about-stack-)
+  - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
+  - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
+  - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+- [Application architecture <a name="server-arc"></a>](#application-architecture-)
+- [API Methods <a name="api-methods"></a>](#api-methods-)
+  - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
+    - [_Arguments_:](#arguments)
+    - [_Example_:](#example)
+  - [GET Ad <a name="get-ad"></a>](#get-ad-)
+    - [_Arguments_:](#arguments-1)
+    - [_Examples_:](#examples)
+  - [GET Ads <a name="get-ads"></a>](#get-ads-)
+    - [_Arguments_:](#arguments-2)
+    - [_Examples_:](#examples-1)
 
 ## Overview <a name="overview"></a>
 
@@ -75,7 +75,7 @@ const ad = new Schema({
 })
 ```
 
-## Server architecture  <a name="server-arc"></a>
+## Application architecture <a name="server-arc"></a>
 
 ![serverArc](./img/serverArc.svg?raw=true)
 
