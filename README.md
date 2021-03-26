@@ -79,7 +79,7 @@ const ad = new Schema({
 
 ![serverArc](./img/serverArc.svg?raw=true)
 
-The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client
+The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client.
 ## API Methods <a name="api-methods"></a>
 
 ### POST Ad <a name="ad post-ad"></a>
@@ -121,7 +121,7 @@ returns response satus code 201, and a json object which contains an id of creat
 
 ### GET Ad <a name="get-ad"></a>
 
-This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.\
+This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.
 Optional fields (you can request them by passing the fields parameter): description, links to all photos.
 
 #### _Arguments_:
