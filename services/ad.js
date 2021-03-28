@@ -1,11 +1,22 @@
 const Ad = require('../model/ad')
-const { querySortValidator, queryAdValidator } = require('../utils')
+const { querySortValidator, queryAdValidator, updateAdlidator } = require('../utils')
 const { PAGE_SIZE, DICTIONARY, PARSED_OBJECTS } = require('../constants')
 
-exports.createAd = async ad => {
+exports.getAd = async (adId, query) => {
   try {
-    const postedAd = await new Ad(ad).save()
-    return postedAd
+    if (Object.keys(query).length === 0) {
+      const ad = await Ad.findById(adId, PARSED_OBJECTS.withoutParams)
+      return ad
+    } else if (query.fields && Object.keys(query).length === 1) {
+      const isValid = queryAdValidator(query.fields)
+      if (isValid) {
+        return await Ad.findById(adId, isValid)
+      } else {
+        throw new Error(DICTIONARY.errors.badRequest)
+      }
+    } else {
+      throw new Error(DICTIONARY.errors.badRequest)
+    }
   } catch (err) {
     return err
   }
@@ -27,21 +38,35 @@ exports.getAds = async query => {
   }
 }
 
-exports.getAd = async (adId, query) => {
+exports.createAd = async ad => {
   try {
-    if (Object.keys(query).length === 0) {
-      const ad = await Ad.findById(adId, PARSED_OBJECTS.withoutParam)
-      return ad
-    } else if (query.fields && Object.keys(query).length === 1) {
-      const isValid = queryAdValidator(query.fields)
-      if (isValid) {
-        return await Ad.findById(adId, isValid)
-      } else {
-        throw new Error(DICTIONARY.errors.badRequest)
-      }
+    const postedAd = await new Ad(ad).save()
+    return postedAd
+  } catch (err) {
+    return err
+  }
+}
+
+exports.updateAd = async (adId, body) => {
+  try {
+    const isValid = updateAdlidator(body)
+    if (isValid) {
+      return await Ad.findOneAndUpdate({ _id: adId }, body, { new: true })
     } else {
       throw new Error(DICTIONARY.errors.badRequest)
     }
+  } catch (err) {
+    return err
+  }
+}
+
+exports.deleteAd = async adId => {
+  try {
+    const deleteAd = await Ad.findOneAndDelete({ _id: adId })
+    if (deleteAd === null) {
+      throw new Error('Ad not exist')
+    }
+    return deleteAd
   } catch (err) {
     return err
   }

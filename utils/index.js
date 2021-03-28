@@ -4,6 +4,7 @@ const {
   PARSED_OBJECTS,
   DICTIONARY
 } = require('../constants')
+const { baseModelName } = require('../model/ad')
 
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
@@ -29,9 +30,13 @@ exports.querySortValidator = query => {
   } else { return false }
 }
 
+exports.updateAdlidator = body => {
+  if (body.imgURLs || body.title || body.description || body.price) { return true } else { return false }
+}
+
 exports.notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.badRequest)
 
-exports.serverError = err => res.status(500).json({ massage: err })
+exports.clientError = (res, err) => res.status(500).json({ Error: err })
 
 function isСontains(initialValue, checkValue) { return initialValue.includes(checkValue) }
 
