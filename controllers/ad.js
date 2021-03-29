@@ -49,7 +49,7 @@ exports.updateAd = async (req, res) => {
       res.status(200).json(updatedAd)
     }
   } catch (err) {
-    res.status(400).json({ Error: err.message })
+    clientError(res, err.message)
   }
 }
 
@@ -62,6 +62,6 @@ exports.deleteAd = async (req, res) => {
       res.status(200).json({ id: deletedAd.id })
     }
   } catch (err) {
-    res.status(400).json({ Error: err.message })
+    clientError(res, err.message)
   }
 }

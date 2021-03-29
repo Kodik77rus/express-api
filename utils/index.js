@@ -1,8 +1,9 @@
 const {
   VALID_QUERY_REQ_SORT,
-  VALID_QUERY_GET_AD, URL_REGEX,
+  VALID_QUERY_GET_AD, 
   PARSED_OBJECTS,
-  DICTIONARY
+  DICTIONARY,
+  URL_REGEX
 } = require('../constants')
 
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
