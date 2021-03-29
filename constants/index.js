@@ -50,6 +50,7 @@ exports.DICTIONARY = {
     validationUrl: 'Invalid URL, URL must contains http or https',
   },
   errors: {
-    badRequest: 'Bad request'
+    badRequest: 'Bad request',
+    notFound: 'Not Found'
   }
 }
