@@ -1,14 +1,13 @@
-# firstApi
-
-This is pet service for storing and submitting ads.
-
-## Navigation
+# Navigation
+- [firstApi](#firstapi)
 - [Overview <a name="overview"></a>](#overview-)
 - [About stack <a name="about-stack"></a>](#about-stack-)
   - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
   - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
   - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+  - [Docker-compose file](#docker-compose-file)
 - [Application architecture <a name="server-arc"></a>](#application-architecture-)
+- [Start project](#start-project)
 - [API Methods <a name="api-methods"></a>](#api-methods-)
   - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
     - [_Arguments_:](#arguments)
@@ -19,6 +18,10 @@ This is pet service for storing and submitting ads.
   - [GET Ads <a name="get-ads"></a>](#get-ads-)
     - [_Arguments_:](#arguments-2)
     - [_Examples_:](#examples-1)
+    - 
+## firstApi
+
+This is pet service for storing and submitting ads.
 
 ## Overview <a name="overview"></a>
 
@@ -76,11 +79,56 @@ const ad = new Schema({
 })
 ```
 
+### Docker-compose file 
+
+Initializing services
+
+```docker
+version: '3.4'
+
+services:
+  firstapi:
+    image: firstapi
+    restart: always
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+    ports:
+      - 8081:8081
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27018:27017
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+```
+
 ## Application architecture <a name="server-arc"></a>
 
 ![serverArc](./img/serverArc.svg?raw=true)
 
 The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client.
+
+## Start project
+At first create an firstapi image by running command `docker build -t firstapi .` , then run command `docker-compose -f "docker-compose.yml" up -d --build` . The file `init-mongo.js` creates initial database, consisting of 21 documents, and also creates an admin and a database user. 
+
+>For pretty view of database, use route `http://localhost:8081/` .
+
 ## API Methods <a name="api-methods"></a>
 
 ### POST Ad <a name="ad post-ad"></a>
