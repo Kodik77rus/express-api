@@ -1,24 +1,31 @@
 # Navigation
-- [firstApi](#firstapi)
-- [Overview <a name="overview"></a>](#overview-)
-- [About stack <a name="about-stack"></a>](#about-stack-)
-  - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
-  - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
-  - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
-  - [Docker-compose file](#docker-compose-file)
-- [Application architecture <a name="server-arc"></a>](#application-architecture-)
-- [Start project](#start-project)
-- [API Methods <a name="api-methods"></a>](#api-methods-)
-  - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
-    - [_Arguments_:](#arguments)
-    - [_Example_:](#example)
-  - [GET Ad <a name="get-ad"></a>](#get-ad-)
-    - [_Arguments_:](#arguments-1)
-    - [_Examples_:](#examples)
-  - [GET Ads <a name="get-ads"></a>](#get-ads-)
-    - [_Arguments_:](#arguments-2)
-    - [_Examples_:](#examples-1)
-    - 
+- [Navigation](#navigation)
+  - [firstApi](#firstapi)
+  - [Overview <a name="overview"></a>](#overview-)
+  - [About stack <a name="about-stack"></a>](#about-stack-)
+    - [This project based on: <a name="this-project-based-on"></a>](#this-project-based-on-)
+    - [NPM modules used: <a name="npm-modules-used"></a>](#npm-modules-used-)
+    - [MongoDB schema: <a name="mongodb-schema"></a>](#mongodb-schema-)
+    - [Docker-compose file](#docker-compose-file)
+  - [Application architecture <a name="server-arc"></a>](#application-architecture-)
+  - [Start project](#start-project)
+  - [API Methods <a name="api-methods"></a>](#api-methods-)
+    - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
+      - [_Arguments_:](#arguments)
+      - [_Example_:](#example)
+      - [POST `api/ad`](#post-apiad)
+    - [GET Ad <a name="get-ad"></a>](#get-ad-)
+      - [_Arguments_:](#arguments-1)
+      - [_Examples_:](#examples)
+      - [1. GET `/api/ad/604a990f7c6dba`](#1-get-apiad604a990f7c6dba)
+      - [2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-apiad604a990f7c6dbafieldsimgurls)
+      - [3. GET `/api/ad/604a990f7c6dba?fields=description`](#3-get-apiad604a990f7c6dbafieldsdescription)
+      - [4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-apiad604a990f7c6dbafieldsimgurlsdescription)
+    - [GET Ads <a name="get-ads"></a>](#get-ads-)
+      - [_Arguments_:](#arguments-2)
+      - [_Examples_:](#examples-1)
+      - [1. GET `/api/ads?page=1&sort=byPriceAsc`](#1-get-apiadspage1sortbypriceasc)
+      - [2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-apiadspage2sortbypricedescbydateasc)
 ## firstApi
 
 This is pet service for storing and submitting ads.
@@ -278,38 +285,57 @@ returns response satus code 200, and page (sortred array of object by price asce
 
 ```json
 [
-  {
-    "title": "title_7",
-    "price": 9,
-    "mainUrl": "https://mainImg"
-  },
-  {
-    "title": "crutches",
-    "price": 77,
-    "mainUrl": "https://mainImg"
-  },
-  {
-    "title": "crutches",
-    "price": 77,
-    "mainUrl": "https://mainImg"
-  },
-  {
-    "title": "crutches",
-    "price": 78,
-    "mainUrl": "https://mainImg"
-  },
-  {
-    "title": "title_5",
-    "price": 123,
-    "mainUrl": "https://mainImg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 567,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
+    {
+        "title": "test_6",
+        "price": 77,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_1",
+        "price": 77,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_8",
+        "price": 77,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "crutches",
+        "price": 78,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_10",
+        "price": 213,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_3",
+        "price": 345,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_2",
+        "price": 567,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_11",
+        "price": 879,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_16",
+        "price": 1234,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_18",
+        "price": 2345,
+        "mainUrl": "https://mainImg"
+    }
 ]
-// and other 4
 ```
 
 #### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
@@ -318,47 +344,55 @@ returns response satus code 200, and page (sortred array of object by price desc
 
 ```json
 [
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 677,
-    "mainUrl": "https://tasha"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 677,
-    "mainUrl": "https://tasha"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 677,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-      "price": 567,
-      "mainUrl": "http://dfgdsfgdsfg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 567,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 567,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 567,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
-  {
-    "title": "[pergggggggggggggggggggggggggty",
-    "price": 567,
-    "mainUrl": "http://dfgdsfgdsfg"
-  },
+    {
+        "title": "test_18",
+        "price": 2345,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_19",
+        "price": 2345,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_5",
+        "price": 2345,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_16",
+        "price": 1234,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_11",
+        "price": 879,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_2",
+        "price": 567,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_3",
+        "price": 345,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_10",
+        "price": 213,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "crutches",
+        "price": 78,
+        "mainUrl": "https://mainImg"
+    },
+    {
+        "title": "test_1",
+        "price": 77,
+        "mainUrl": "https://mainImg"
+    }
 ]
-
-// and other 2 
 ```
