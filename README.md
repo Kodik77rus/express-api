@@ -29,6 +29,7 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 
 ### This project based on: <a name="this-project-based-on"></a>
 
+-   Docker
 -   MongoDB
 -   NodeJS
 
@@ -209,21 +210,21 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 | ***Required parameters:***        |          |                                                       |         |
 | **page**                          | `string` | number of  page                                       | `true`  |
 | ***One of these parameters:***    |          |                                                       |         |
-| **sort="byPriceAsс"**             | `string` | sorts by price ascending                              | `true`  |
+| **sort="byPriceAsc"**             | `string` | sorts by price ascending                              | `true`  |
 | **sort="byDateAsc"**              | `string` | sorts by date ascending                               | `true`  |
 | **sort="byPriceDesc"**            | `string` | sorts by price descending                             | `true`  |
 | **sort="byDateDesc"**             | `string` | sorts by date  descending                             | `true`  |
 | ***Additional parameters:***      |          |                                                       |         |
-| **sort="byPriceAsс,byDateAsc"**   | `string` | sorts by price ascendin and<br />by date ascending    | `false` |
+| **sort="byPriceAsc,byDateAsc"**   | `string` | sorts by price ascendin and<br />by date ascending    | `false` |
 | **sort="byPriceDesc,byDateDesc"** | `string` | sorts by price descending and<br />by date descending | `false` |
-| **sort="byPriceAsс,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
+| **sort="byPriceAsc,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
 | **sort="byPriceDesc,byDateAsc"**  | `string` | sorts by price descending and<br />by date ascending  | `false` |
 
 >position of the attributes passed in the query request is not important.
 
 #### _Examples_:
 
-#### 1. GET `/api/ads?page=1&sort=byPriceAsс`
+#### 1. GET `/api/ads?page=1&sort=byPriceAsc`
 
 returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
 
