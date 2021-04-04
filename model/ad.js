@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 const { shemaUrlValidator, shemaArrayValidator } = require('../utils')
 const { DICTIONARY } = require('../constants')
 
-const ad = new Schema({
+const adsSchema = new Schema({
   title: {
     type: String,
     maxlength: 200,
@@ -31,6 +31,6 @@ const ad = new Schema({
   }
 })
 
-ad.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schema.validationUrl)
+adsSchema.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schema.validationUrl)
 
-module.exports = model('Ad', ad)
+module.exports = model('Ads', adsSchema)
