@@ -12,7 +12,6 @@
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [_Arguments_:](#arguments)
       - [_Example_:](#example)
-      - [POST `api/ad`](#post-apiad)
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
       - [_Arguments_:](#arguments-1)
       - [_Examples_:](#examples)
