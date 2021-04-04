@@ -81,8 +81,6 @@ const ad = new Schema({
 
 ### Docker-compose file 
 
-Initializing services
-
 ```docker
 version: '3.4'
 
