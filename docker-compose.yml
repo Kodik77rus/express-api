@@ -11,6 +11,18 @@ services:
     links:
       - mongo
 
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+    ports:
+      - 8081:8081
+    links:
+      - mongo
+
   mongo:
     image: mongo
     restart: always

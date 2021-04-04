@@ -27,9 +27,9 @@ exports.getAds = async query => {
     const isValid = querySortValidator(query)
     if (isValid) {
       return await Ads.find({}, PARSED_OBJECTS.withoutParams)
-        .sort(isValid)
         .skip(PAGE_SIZE * (query.page - 1))
         .limit(PAGE_SIZE)
+        .sort(isValid)
     } else {
       throw new Error(DICTIONARY.errors.badRequest)
     }
