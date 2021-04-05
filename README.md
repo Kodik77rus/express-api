@@ -373,7 +373,7 @@ response status code.
 {
   "title":"crutches",
   "description":"slightly worn but in good condition",
-  "price":"77",
+  "price":77,
   "imgURLs": ["https://mainImg","https://secondImg","https://thirdImg"]
 }
 ```
@@ -399,7 +399,7 @@ body:
 {
   "title":"test",
   "description":"slightly worn but in good condition",
-  "price":"77",
+  "price":77,
   "imgURLs": ["https://mainImg","https://test_1","https://test_2"]
 }
 ```
