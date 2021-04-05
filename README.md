@@ -10,22 +10,28 @@
   - [Application architecture <a name="server-arc"></a>](#application-architecture-)
   - [Start project](#start-project)
   - [API Methods <a name="api-methods"></a>](#api-methods-)
-    - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
-      - [_Arguments_:](#arguments)
-      - [_Example_:](#example)
-      - [POST `api/ad`](#post-apiad)
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
-      - [_Arguments_:](#arguments-1)
-      - [_Examples_:](#examples)
-      - [1. GET `/api/ad/604a990f7c6dba`](#1-get-apiad604a990f7c6dba)
-      - [2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-apiad604a990f7c6dbafieldsimgurls)
-      - [3. GET `/api/ad/604a990f7c6dba?fields=description`](#3-get-apiad604a990f7c6dbafieldsdescription)
-      - [4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-apiad604a990f7c6dbafieldsimgurlsdescription)
+      - [Arguments:](#arguments)
+      - [Examples:](#examples)
+      - [1. GET `http://localhost:3000/api/ad/604a990f7c6dba`](#1-get-httplocalhost3000apiad604a990f7c6dba)
+      - [2. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurls)
+      - [3. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=description`](#3-get-httplocalhost3000apiad604a990f7c6dbafieldsdescription)
+      - [4. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurlsdescription)
     - [GET Ads <a name="get-ads"></a>](#get-ads-)
-      - [_Arguments_:](#arguments-2)
-      - [_Examples_:](#examples-1)
-      - [1. GET `/api/ads?page=1&sort=byPriceAsc`](#1-get-apiadspage1sortbypriceasc)
-      - [2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-apiadspage2sortbypricedescbydateasc)
+      - [Arguments:](#arguments-1)
+      - [Examples:](#examples-1)
+      - [1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`](#1-get-httplocalhost3000apiadspage1sortbypriceasc)
+      - [2. GET `http://localhost:3000/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-httplocalhost3000apiadspage2sortbypricedescbydateasc)
+    - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
+      - [Arguments:](#arguments-2)
+      - [Example:](#example)
+      - [POST `http://localhost:3000/api/ad`](#post-httplocalhost3000apiad)
+    - [PUT Ad](#put-ad)
+      - [Example:](#example-1)
+      - [PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#put-httplocalhost3000apiad6068efe540975e2e9ce9534b)
+    - [DELETE Ad](#delete-ad)
+      - [Example:](#example-2)
+      - [DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#delete-httplocalhost3000apiad6068efe540975e2e9ce9534b)
 ## firstApi
 
 This is pet service for storing and submitting ads.
@@ -51,7 +57,6 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 -   Nodemon
 
 ### MongoDB schema: <a name="mongodb-schema"></a> 
-
 ```js
 // defines the metadata of the schema model -
 // its properties, data types and validation
@@ -87,7 +92,6 @@ const ad = new Schema({
 ```
 
 ### Docker-compose file 
-
 ```docker
 version: '3.4'
 
@@ -135,50 +139,12 @@ At first create an firstapi image by running command `docker build -t firstapi .
 >For pretty view of database, use route `http://localhost:8081/` .
 
 ## API Methods <a name="api-methods"></a>
-
-### POST Ad <a name="ad post-ad"></a>
-
-This method takes: title, description, links images, price, and returns the ID of the created ad and \
-response status code.
-
-#### _Arguments_:
-
-| Request Body    |    type    | description       | validation                                                                    | require |
-| --------------- | :--------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
-| **title**       |  `string`  | name of ad        | max length 200 symbols                                                        | `true`  |
-| **description** |  `string`  | description of ad | max length 1000 symbols                                                       | `true`  |
-| **price**       |  `number`  | price of ad       | price > 0                                                                     | `true`  |
-| **imgURLs**     | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
-
->Automatically creates an id and date in ISO 8601 format.
-
-#### _Example_:
-
-#### POST `api/ad`
-
-```json
-{
-  "title":"crutches",
-  "description":"slightly worn but in good condition",
-  "price":"77",
-  "imgURLs": ["https://mainImg","https://secondImg","https://thirdImg"]
-}
-```
-
-returns response satus code 201, and a json object which contains an id of created ad.
-
-```json
-{
-  "id": "6057aa5592b1fc1f986261b1"
-}
-```
-
 ### GET Ad <a name="get-ad"></a>
 
 This method takes the ad ID as a required parametr and returns: ad name, price, link to the main photo.
 Optional fields (you can request them by passing the fields parameter): description, links to all photos.
 
-#### _Arguments_:
+#### Arguments:
 
 | Parameters                                |   type   | description                            | require |
 | ----------------------------------------- | :------: | -------------------------------------- | :-----: |
@@ -191,9 +157,9 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 >position of the attributes passed in the `fields` is not important
 
-#### _Examples_:
+#### Examples:
 
-#### 1. GET `/api/ad/604a990f7c6dba`
+#### 1. GET `http://localhost:3000/api/ad/604a990f7c6dba`
 
 returns response satus code 200, and a json object which contains a title, price, and main image url of ad.
 
@@ -205,7 +171,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-#### 2. GET `/api/ad/604a990f7c6dba?fields=imgURLs`
+#### 2. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs`
 
 returns response satus code 200, and a json object which contains a title, price, and all images urls of ad.
 
@@ -221,7 +187,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-#### 3. GET `/api/ad/604a990f7c6dba?fields=description`
+#### 3. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=description`
 
 returns response satus code 200, and a json object which contains a title, price and description of ad.
 
@@ -233,7 +199,7 @@ returns response satus code 200, and a json object which contains a title, price
 }
 ```
 
-#### 4. GET `/api/ad/604a990f7c6dba?fields=imgURLs,description`
+#### 4. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs,description`
 
 returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad.
 
@@ -256,7 +222,7 @@ This method has pagination: there are 10 ads on one page;\
 It also sorts: by price (ascending / descending) and by creation date (ascending/descending);\
 And returns: response satus code 200 and json object with fields: ad name, link to the main image (first in the list), price.
 
-#### _Arguments_:
+#### Arguments:
 
 | Query  parameters                 |   type   | description                                           | require |
 | --------------------------------- | :------: | ----------------------------------------------------- | :-----: |
@@ -275,9 +241,9 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 >position of the attributes passed in the query request is not important.
 
-#### _Examples_:
+#### Examples:
 
-#### 1. GET `/api/ads?page=1&sort=byPriceAsc`
+#### 1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`
 
 returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
 
@@ -336,7 +302,7 @@ returns response satus code 200, and page (sortred array of object by price asce
 ]
 ```
 
-#### 2. GET `/api/ads?page=2&sort=byPriceDesc,byDateAsc`
+#### 2. GET `http://localhost:3000/api/ads?page=2&sort=byPriceDesc,byDateAsc`
 
 returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, each object has contains a title, price, link to the main image (first in the list) of ad.
 
@@ -393,4 +359,90 @@ returns response satus code 200, and page (sortred array of object by price desc
         "mainUrl": "https://mainImg"
     }
 ]
+```
+### POST Ad <a name="ad post-ad"></a>
+
+This method takes: title, description, links images, price, and returns the ID of the created ad and \
+response status code.
+#### Arguments:
+
+| Request Body    |    type    | description       | validation                                                                    | require |
+| --------------- | :--------: | ----------------- | ----------------------------------------------------------------------------- | :-----: |
+| **title**       |  `string`  | name of ad        | max length 200 symbols                                                        | `true`  |
+| **description** |  `string`  | description of ad | max length 1000 symbols                                                       | `true`  |
+| **price**       |  `number`  | price of ad       | price > 0                                                                     | `true`  |
+| **imgURLs**     | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
+
+>Automatically creates an id and date in ISO 8601 format.
+
+#### Example:
+#### POST `http://localhost:3000/api/ad`
+
+```json
+{
+  "title":"crutches",
+  "description":"slightly worn but in good condition",
+  "price":"77",
+  "imgURLs": ["https://mainImg","https://secondImg","https://thirdImg"]
+}
+```
+
+Returns response satus code 201, and a json object which contains an id of created ad.
+
+```json
+{
+  "id": "6057aa5592b1fc1f986261b1"
+}
+```
+
+### PUT Ad
+
+This method takes: id of Ad title as a query param and body: title, description, links images, price, and returns updated ad in JSON foramt.
+
+#### Example:
+#### PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
+
+body:
+
+```json
+{
+  "title":"test",
+  "description":"slightly worn but in good condition",
+  "price":"77",
+  "imgURLs": ["https://mainImg","https://test_1","https://test_2"]
+}
+```
+
+Returns updated ad and response status code 200.
+
+```json
+{
+  "imgURLs": [
+      "https://mainImg",
+      "https://test_1",
+      "https://test_2"
+  ],
+  "_id": "6068efe540975e2e9ce9534b",
+  "title": "test",
+  "description": "slightly worn but in good condition",
+  "price": 77,
+  "date": "2021-04-03T22:44:53.980Z",
+  "__v": 0
+}
+```
+>Date also updated
+
+### DELETE Ad
+
+This method takes: id of Ad title as a query param and delete ad returns delete id of ad in JSON format
+
+#### Example:
+#### DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
+
+Returns deleted id of ad and response status code 200.
+
+```json
+{
+  "id": "6068efe540975e2e9ce9534b"
+}
 ```
