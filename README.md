@@ -1,5 +1,4 @@
 # Navigation
-- [Navigation](#navigation)
   - [firstApi](#firstapi)
   - [Overview <a name="overview"></a>](#overview-)
   - [About stack <a name="about-stack"></a>](#about-stack-)
@@ -13,25 +12,17 @@
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
       - [Arguments:](#arguments)
       - [Examples:](#examples)
-      - [1. GET `http://localhost:3000/api/ad/604a990f7c6dba`](#1-get-httplocalhost3000apiad604a990f7c6dba)
-      - [2. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurls)
-      - [3. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=description`](#3-get-httplocalhost3000apiad604a990f7c6dbafieldsdescription)
-      - [4. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurlsdescription)
     - [GET Ads <a name="get-ads"></a>](#get-ads-)
       - [Arguments:](#arguments-1)
       - [Examples:](#examples-1)
-      - [1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`](#1-get-httplocalhost3000apiadspage1sortbypriceasc)
-      - [2. GET `http://localhost:3000/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-httplocalhost3000apiadspage2sortbypricedescbydateasc)
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [Arguments:](#arguments-2)
       - [Example:](#example)
-      - [POST `http://localhost:3000/api/ad`](#post-httplocalhost3000apiad)
     - [PUT Ad](#put-ad)
       - [Example:](#example-1)
-      - [PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#put-httplocalhost3000apiad6068efe540975e2e9ce9534b)
     - [DELETE Ad](#delete-ad)
       - [Example:](#example-2)
-      - [DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#delete-httplocalhost3000apiad6068efe540975e2e9ce9534b)
+
 ## firstApi
 
 This is pet service for storing and submitting ads.
