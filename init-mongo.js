@@ -1,4 +1,3 @@
-
 db = new Mongo().getDB('admin');
 
 db.createUser({
@@ -22,7 +21,6 @@ db.createUser({
     db: 'firstAPI'
   }]
 })
-
 
 db.createCollection('ads')
 

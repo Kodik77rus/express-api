@@ -36,7 +36,7 @@ exports.updateAdlidator = body => {
 
 exports.notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.notFound)
 
-exports.clientError = (res, err) => res.status(500).json({ Error: err })
+exports.serverError = (res, err) => res.status(500).json({ Error: err })
 
 function isСontains(initialValue, checkValue) { return initialValue.includes(checkValue) }
 

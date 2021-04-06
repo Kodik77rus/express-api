@@ -1,4 +1,4 @@
-exports.URL_FOR_CONNECT_TO_DB = 'mongodb+srv://george:Z34vE8Nm3xaiifoF@cluster0.fihkq.mongodb.net/firstAPI?retryWrites=true&w=majority'
+exports.URL_FOR_CONNECT_TO_DB = 'mongodb://user:pwd@mongo:27017/firstAPI'
 
 exports.URL_REGEX = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 
@@ -59,7 +59,12 @@ exports.DICTIONARY = {
     validationUrl: 'Invalid URL, URL must contains http or https',
   },
   errors: {
-    badRequest: 'Bad request',
-    notFound: 'Not Found'
+    badRequest: 'Bad Request',
+    notFound: 'Not Found',
+    badId: 'Bad ID',
+    adNotFound: 'Ad Not Found',
+    badFields: 'Bad Fields',
+    badBody: 'Bad Body Params',
+    badSortFields: 'Bad Sort Fields'
   }
 }
