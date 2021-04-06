@@ -302,52 +302,52 @@ returns response satus code 200, and page (sortred array of object by price desc
     {
         "title": "test_18",
         "price": 2345,
-        "mainUrl": "https://mainImg"
+        "date": "2021-04-06 12:58:54"
     },
     {
         "title": "test_19",
-        "price": 2345,
-        "mainUrl": "https://mainImg"
-    },
-    {
-        "title": "test_5",
-        "price": 2345,
-        "mainUrl": "https://mainImg"
-    },
-    {
-        "title": "test_16",
-        "price": 1234,
-        "mainUrl": "https://mainImg"
+        "price": 2335,
+        "date": "2021-04-06 12:59:10"
     },
     {
         "title": "test_11",
         "price": 879,
-        "mainUrl": "https://mainImg"
+        "date": "2021-04-06 12:59:44"
     },
     {
-        "title": "test_2",
-        "price": 567,
-        "mainUrl": "https://mainImg"
+        "title": "test_11",
+        "price": 879,
+        "date": "2021-04-06 01:00:11"
+    },
+    {
+        "title": "test_11",
+        "price": 879,
+        "date": "2021-04-06 01:00:20"
     },
     {
         "title": "test_3",
         "price": 345,
-        "mainUrl": "https://mainImg"
+        "date": "2021-04-06 01:00:40"
     },
     {
         "title": "test_10",
-        "price": 213,
-        "mainUrl": "https://mainImg"
+        "price": 345,
+        "date": "2021-04-06 01:00:46"
     },
     {
         "title": "crutches",
         "price": 78,
-        "mainUrl": "https://mainImg"
+        "date": "2021-04-06 01:00:57"
     },
     {
         "title": "test_1",
         "price": 77,
-        "mainUrl": "https://mainImg"
+        "date": "2021-04-06 01:01:07"
+    },
+    {
+        "title": "test_20",
+        "price": 77,
+        "date": "2021-04-06 01:01:55"
     }
 ]
 ```
