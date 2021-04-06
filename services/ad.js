@@ -1,6 +1,7 @@
+const moment = require('moment')
 const Ads = require('../model/ad')
 const { querySortValidator, queryAdValidator, updateAdlidator } = require('../utils')
-const { PAGE_SIZE, DICTIONARY, PARSED_OBJECTS } = require('../constants')
+const { PAGE_SIZE, DICTIONARY, PARSED_OBJECTS, DATE_FORMAT } = require('../constants')
 
 exports.getAd = async (adId, query) => {
   try {
@@ -25,8 +26,21 @@ exports.getAd = async (adId, query) => {
 exports.getAds = async query => {
   try {
     const isValid = querySortValidator(query)
-    if (isValid) {
-      return await Ads.find({}, PARSED_OBJECTS.withoutParams)
+    if (isValid && isValid.hasOwnProperty('date')) {
+      const ads = await Ads
+        .find({}, PARSED_OBJECTS.withDate)
+        .skip(PAGE_SIZE * (query.page - 1))
+        .limit(PAGE_SIZE)
+        .sort(isValid)
+      return ads.map(a => ({
+        title: a.title,
+        price: a.price,
+        mainUrl: a.mainUrl,
+        date: moment(a.date).format(DATE_FORMAT)
+      }))
+    } else if (isValid) {
+      return await Ads
+        .find({}, PARSED_OBJECTS.withoutParams)
         .skip(PAGE_SIZE * (query.page - 1))
         .limit(PAGE_SIZE)
         .sort(isValid)

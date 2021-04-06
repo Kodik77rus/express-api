@@ -13,6 +13,8 @@ exports.VALID_QUERY_GET_AD = [
   'description', 'imgURLs'
 ]
 
+exports.DATE_FORMAT = 'YYYY-MM-DD hh:mm:ss'
+
 exports.PARSED_OBJECTS = {
   withoutParams: {
     title: 1,
@@ -37,6 +39,13 @@ exports.PARSED_OBJECTS = {
     title: 1,
     price: 1,
     imgURLs: 1,
+    _id: 0
+  },
+  withDate: {
+    title: 1,
+    price: 1,
+    mainUrl: { $first: '$imgURLs' },
+    date: 1,
     _id: 0
   }
 }
