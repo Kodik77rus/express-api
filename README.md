@@ -146,13 +146,13 @@ Optional fields (you can request them by passing the fields parameter): descript
 | **fields="imgURLs"**                      | `string` | all image of ad                        | `false` |
 | **fields="imgURLs,description"**          | `string` | all image of ad <br /> and description | `false` |
 
->position of the attributes passed in the `fields` is not important
+>Position of the attributes passed in the `fields` is not important
 
 #### Examples:
 
 #### 1. GET `http://localhost:3000/api/ad/604a990f7c6dba`
 
-returns response satus code 200, and a json object which contains a title, price, and main image url of ad.
+Returns response satus code 200, and a json object which contains a title, price, and main image url of ad.
 
 ```json
 {
@@ -164,7 +164,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 #### 2. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs`
 
-returns response satus code 200, and a json object which contains a title, price, and all images urls of ad.
+Returns response satus code 200, and a json object which contains a title, price, and all images urls of ad.
 
 ```json
 {
@@ -180,7 +180,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 #### 3. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=description`
 
-returns response satus code 200, and a json object which contains a title, price and description of ad.
+Returns response satus code 200, and a json object which contains a title, price and description of ad.
 
 ```json
 {
@@ -192,7 +192,7 @@ returns response satus code 200, and a json object which contains a title, price
 
 #### 4. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs,description`
 
-returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad.
+Returns response satus code 200, and a json object which contains a title, price, description and all images urls of ad.
 
 ```json
 {
@@ -230,15 +230,15 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 | **sort="byPriceAsc,byDateDesc"**  | `string` | sorts by price ascendin and<br />by date descending   | `false` |
 | **sort="byPriceDesc,byDateAsc"**  | `string` | sorts by price descending and<br />by date ascending  | `false` |
 
->position of the attributes passed in the query request is not important.
+>Position of the attributes passed in the query request is not important.
 
 #### Examples:
 
 #### 1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`
 
-returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad. 
+Returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad. 
 
->If query param has `"byDate"` the date field is added to the object
+>If query param has `"byDate"` the date field is added to the object.
 
 ```json
 [
