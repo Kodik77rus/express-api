@@ -167,7 +167,7 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 | Parameter         |   type   |                  values                  |
 | ----------------- | :------: | :--------------------------------------: |
-| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID,<br/>Bad Fields |
+| **ERROR_MESSAGE** | `string` | "Ad Not Found",<br/>"bad ID",<br/>"Bad Fields" |
 
 #### Examples:
 
@@ -255,9 +255,9 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 #### Errors:
 
-| Parameter         |   type   |     values      |
-| ----------------- | :------: | :-------------: |
-| **ERROR_MESSAGE** | `string` | Bad Sort Fields |
+| Parameter         |   type   |      values       |
+| ----------------- | :------: | :---------------: |
+| **ERROR_MESSAGE** | `string` | "Bad Sort Fields" |
 
 #### Examples:
 
@@ -397,9 +397,9 @@ response status code.
 
 #### Errors:
 
-| Parameter         |   type   |                                                                                        values                                                                                         |
-| ----------------- | :------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| **ERROR_MESSAGE** | `string` | Ad title required,<br/>Ad description required,<br/>Ad price required,<br/>You must pass an array of more than 1 url and no more than 3 urls,<br/>Invalid URL, URL must contains http | or https |
+| Parameter         |   Type   |                                                                                                  values                                                                                                  |
+| ----------------- | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **ERROR_MESSAGE** | `string` | "Ad title required",<br/>"Ad description required",<br/>"Ad price required",<br/>"You must pass an array of more than 1 url and no more than 3 urls",<br/>"Invalid URL, URL must contains http or https" |
 
 #### Example:
 #### POST `http://localhost:3000/api/ad`
@@ -425,21 +425,21 @@ Returns response satus code 201, and a json object which contains an id of creat
 
 This method takes: id of Ad title as a query param and body: title, description, links images, price, and returns updated ad in JSON foramt.
 
-| Parameter          |    type    | description       | validation                                                                    | require |
-| ------------------ | :--------: | ----------------- | :---------------------------------------------------------------------------- | :-----: |
+| Parameter          |    Type    | Description       |                                  Validation                                   | Require |
+| ------------------ | :--------: | ----------------- | :---------------------------------------------------------------------------: | :-----: |
 | ***Query param***  |            |                   |                                                                               |         |
-| **id**             |  `string`  | uniq param for ad | /^[0-9a-fA-F]{24}$/ (typeObjectId)                                            | `true`  |
+| **id**             |  `string`  | uniq param for ad |                      /^[0-9a-fA-F]{24}$/ (typeObjectId)                       | `true`  |
 | ***Request Body*** |            |                   |                                                                               |         |
-| **title**          |  `string`  | name of ad        | max length 200 symbols                                                        | `true`  |
-| **description**    |  `string`  | description of ad | max length 1000 symbols                                                       | `true`  |
-| **price**          |  `number`  | price of ad       | price > 0                                                                     | `true`  |
+| **title**          |  `string`  | name of ad        |                            max length 200 symbols                             | `true`  |
+| **description**    |  `string`  | description of ad |                            max length 1000 symbols                            | `true`  |
+| **price**          |  `number`  | price of ad       |                                   price > 0                                   | `true`  |
 | **imgURLs**        | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
 
 #### Errors:
 
-| Parameter         |   type   |                    values                     |
-| ----------------- | :------: | :-------------------------------------------: |
-| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID,</br>Bad Body Params |
+| Parameter         |   type   |                        values                        |
+| ----------------- | :------: | :--------------------------------------------------: |
+| **ERROR_MESSAGE** | `string` | "Ad Not Found" ,<br/>"bad ID",</br>"Bad Body Params" |
 
 #### Example:
 #### PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
@@ -486,9 +486,9 @@ This method takes: id of Ad title as a query param and delete ad returns delete 
 
 #### Errors:
 
-| Parameter         |   type   |          values          |
-| ----------------- | :------: | :----------------------: |
-| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID |
+| Parameter         |   type   |            values             |
+| ----------------- | :------: | :---------------------------: |
+| **ERROR_MESSAGE** | `string` | "Ad Not Found" ,<br/>"bad ID" |
 
 #### Example:
 #### DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
