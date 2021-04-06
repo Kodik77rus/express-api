@@ -22,10 +22,11 @@
     - [Errors:](#errors-2)
     - [Example:](#example)
   - [PUT Ad](#put-ad)
+    - [Arguments:](#arguments-3)
     - [Errors:](#errors-3)
     - [Example:](#example-1)
   - [DELETE Ad](#delete-ad)
-    - [Arguments:](#arguments-3)
+    - [Arguments:](#arguments-4)
     - [Errors:](#errors-4)
     - [Example:](#example-2)
 
@@ -413,7 +414,7 @@ Returns response satus code 201, and a json object which contains an id of creat
 ```
 
 ### PUT Ad
-
+#### Arguments:
 This method takes: id of Ad title as a query param and body: title, description, links images, price, and returns updated ad in JSON foramt.
 
 | Parameter          |    Type    | Description       |                                  Validation                                   | Require |
