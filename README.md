@@ -1,4 +1,5 @@
 # Navigation
+- [Navigation](#navigation)
   - [firstApi](#firstapi)
   - [Overview <a name="overview"></a>](#overview-)
   - [About stack <a name="about-stack"></a>](#about-stack-)
@@ -11,18 +12,32 @@
   - [API Methods <a name="api-methods"></a>](#api-methods-)
     - [GET Ad <a name="get-ad"></a>](#get-ad-)
       - [Arguments:](#arguments)
+      - [Errors:](#errors)
       - [Examples:](#examples)
+      - [1. GET `http://localhost:3000/api/ad/604a990f7c6dba`](#1-get-httplocalhost3000apiad604a990f7c6dba)
+      - [2. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs`](#2-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurls)
+      - [3. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=description`](#3-get-httplocalhost3000apiad604a990f7c6dbafieldsdescription)
+      - [4. GET `http://localhost:3000/api/ad/604a990f7c6dba?fields=imgURLs,description`](#4-get-httplocalhost3000apiad604a990f7c6dbafieldsimgurlsdescription)
     - [GET Ads <a name="get-ads"></a>](#get-ads-)
       - [Arguments:](#arguments-1)
+      - [Errors:](#errors-1)
       - [Examples:](#examples-1)
+      - [1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`](#1-get-httplocalhost3000apiadspage1sortbypriceasc)
+      - [2. GET `http://localhost:3000/api/ads?page=2&sort=byPriceDesc,byDateAsc`](#2-get-httplocalhost3000apiadspage2sortbypricedescbydateasc)
     - [POST Ad <a name="ad post-ad"></a>](#post-ad-)
       - [Arguments:](#arguments-2)
+      - [Errors:](#errors-2)
       - [Example:](#example)
+      - [POST `http://localhost:3000/api/ad`](#post-httplocalhost3000apiad)
     - [PUT Ad](#put-ad)
+      - [Errors:](#errors-3)
       - [Example:](#example-1)
+      - [PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#put-httplocalhost3000apiad6068efe540975e2e9ce9534b)
     - [DELETE Ad](#delete-ad)
+      - [Arguments:](#arguments-3)
+      - [Errors:](#errors-4)
       - [Example:](#example-2)
-
+      - [DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`](#delete-httplocalhost3000apiad6068efe540975e2e9ce9534b)
 ## firstApi
 
 This is pet service for storing and submitting ads.
@@ -148,6 +163,12 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 >Position of the attributes passed in the `fields` is not important
 
+#### Errors:
+
+| Parameter         |   type   |                  values                  |
+| ----------------- | :------: | :--------------------------------------: |
+| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID,<br/>Bad Fields |
+
 #### Examples:
 
 #### 1. GET `http://localhost:3000/api/ad/604a990f7c6dba`
@@ -231,6 +252,12 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 | **sort="byPriceDesc,byDateAsc"**  | `string` | sorts by price descending and<br />by date ascending  | `false` |
 
 >Position of the attributes passed in the query request is not important.
+
+#### Errors:
+
+| Parameter         |   type   |     values      |
+| ----------------- | :------: | :-------------: |
+| **ERROR_MESSAGE** | `string` | Bad Sort Fields |
 
 #### Examples:
 
@@ -368,6 +395,12 @@ response status code.
 
 >Automatically creates an id and date in ISO 8601 format.
 
+#### Errors:
+
+| Parameter         |   type   |                                                                                        values                                                                                         |
+| ----------------- | :------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **ERROR_MESSAGE** | `string` | Ad title required,<br/>Ad description required,<br/>Ad price required,<br/>You must pass an array of more than 1 url and no more than 3 urls,<br/>Invalid URL, URL must contains http | or https |
+
 #### Example:
 #### POST `http://localhost:3000/api/ad`
 
@@ -391,6 +424,22 @@ Returns response satus code 201, and a json object which contains an id of creat
 ### PUT Ad
 
 This method takes: id of Ad title as a query param and body: title, description, links images, price, and returns updated ad in JSON foramt.
+
+| Parameter          |    type    | description       | validation                                                                    | require |
+| ------------------ | :--------: | ----------------- | :---------------------------------------------------------------------------- | :-----: |
+| ***Query param***  |            |                   |                                                                               |         |
+| **id**             |  `string`  | uniq param for ad | /^[0-9a-fA-F]{24}$/ (typeObjectId)                                            | `true`  |
+| ***Request Body*** |            |                   |                                                                               |         |
+| **title**          |  `string`  | name of ad        | max length 200 symbols                                                        | `true`  |
+| **description**    |  `string`  | description of ad | max length 1000 symbols                                                       | `true`  |
+| **price**          |  `number`  | price of ad       | price > 0                                                                     | `true`  |
+| **imgURLs**        | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
+
+#### Errors:
+
+| Parameter         |   type   |                    values                     |
+| ----------------- | :------: | :-------------------------------------------: |
+| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID,</br>Bad Body Params |
 
 #### Example:
 #### PUT `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
@@ -428,6 +477,18 @@ Returns updated ad and response status code 200.
 ### DELETE Ad
 
 This method takes: id of Ad title as a query param and delete ad returns delete id of ad in JSON format
+
+#### Arguments:
+
+| Query parameter |   type   | description       | require | validation                         |
+| --------------- | :------: | ----------------- | :-----: | :--------------------------------- |
+| **id**          | `string` | uniq param for ad | `true`  | /^[0-9a-fA-F]{24}$/ (typeObjectId) |
+
+#### Errors:
+
+| Parameter         |   type   |          values          |
+| ----------------- | :------: | :----------------------: |
+| **ERROR_MESSAGE** | `string` | Ad Not Found,<br/>bad ID |
 
 #### Example:
 #### DELETE `http://localhost:3000/api/ad/6068efe540975e2e9ce9534b`
