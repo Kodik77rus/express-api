@@ -236,7 +236,9 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 #### 1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`
 
-returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad.
+returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad. 
+
+>If query param has `"byDate"` the date field is added to the object
 
 ```json
 [
