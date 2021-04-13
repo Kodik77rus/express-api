@@ -8,6 +8,10 @@
   - [Docker-compose file](#docker-compose-file)
 - [Application architecture <a name="server-arc"></a>](#application-architecture-)
 - [Start project](#start-project)
+- [About tests](#about-tests)
+  - [Tests coverage](#tests-coverage)
+  - [Unit tests](#unit-tests)
+  - [Integrations tests](#integrations-tests)
 - [API Methods <a name="api-methods"></a>](#api-methods-)
   - [GET Ad <a name="get-ad"></a>](#get-ad-)
     - [Arguments:](#arguments)
@@ -30,6 +34,7 @@
     - [Errors:](#errors-4)
     - [Example:](#example-2)
 
+
 ## firstApi
 
 This is pet service for storing and submitting ads.
@@ -48,7 +53,7 @@ The API is organized around REST. API has predictable resource-oriented URLs, al
 -   NodeJS
 
 ### NPM modules used: <a name="npm-modules-used"></a>
--   Axios
+-   Supertest
 -   ExpressJS
 -   Jest
 -   Mongoose
@@ -127,14 +132,23 @@ services:
 
 ## Application architecture <a name="server-arc"></a>
 
-![serverArc](./img/serverArc.svg?raw=true)
+![serverAplic](./imgs/serverAplic.svg?raw=true)
 
-The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the controller sends a response in json format to the client.
+The http request is processed by the route, then it goes to its controller, then the controller sends a request to the services,<br /> then services sends a request to the database, then the data from the database is sent to the controller, then the controller sends a response in json format to the client.
 
 ## Start project
 At first create an firstapi image by running command `docker build -t firstapi .` , then run command `docker-compose -f "docker-compose.yml" up -d --build` . The file `init-mongo.js` creates initial database, consisting of 21 documents, and also creates an admin and a database user. 
 
 >For pretty view of database, use route `http://localhost:8081/` .
+
+## About tests
+### Tests coverage
+
+![testsCoverage](./imgs/testsCoverage.png?raw=true)
+### Unit tests
+As for unit tests, I decided to cover only the exported functions (validators) in the `utils.js`.
+### Integrations tests
+As for Integration tests, I used  `supertest` and tests all endpoints in the app.
 
 ## API Methods <a name="api-methods"></a>
 ### GET Ad <a name="get-ad"></a>
@@ -144,21 +158,23 @@ Optional fields (you can request them by passing the fields parameter): descript
 
 #### Arguments:
 
-| Parameters                                |   type   | description                            | require |
-| ----------------------------------------- | :------: | -------------------------------------- | :-----: |
-| ***Required request parameter***          |          |                                        |         |
-| **id**                                    | `string` | uniq param for ad                      | `true`  |
+| Parameters                                |    type    | description                            | require |
+| ----------------------------------------- | :--------: | -------------------------------------- | :-----: |
+| ***Required request parameter***          |            |                                        |         |
+| **id**                                    | `ObjectId` | uniq string param for ad               | `true`  |
 | ***Additional query fields parameters:*** |
-| **fields="description"**                  | `string` | description of ad                      | `false` |
-| **fields="imgURLs"**                      | `string` | all image of ad                        | `false` |
-| **fields="imgURLs,description"**          | `string` | all image of ad <br /> and description | `false` |
+| **fields="description"**                  |  `string`  | description of ad                      | `false` |
+| **fields="imgURLs"**                      |  `string`  | all image of ad                        | `false` |
+| **fields="imgURLs,description"**          |  `string`  | all image of ad <br /> and description | `false` |
 
->Position of the attributes passed in the `fields` is not important
+>Position of the attributes passed in the query request is not important.
+>If attributes duplicates func (`isValidQuery`) takes first of them. For example: (fields="description,description") is same that fields="description,
+>Max 2 atruattributes  passed in the query request
 
 #### Errors:
 
-| Parameter         |   type   |                  values                  |
-| ----------------- | :------: | :--------------------------------------: |
+| Parameter         |   type   |                     values                     |
+| ----------------- | :------: | :--------------------------------------------: |
 | **ERROR_MESSAGE** | `string` | "Ad Not Found",<br/>"bad ID",<br/>"Bad Fields" |
 
 #### Examples:
@@ -226,6 +242,8 @@ This method has pagination: there are 10 ads on one page;\
 It also sorts: by price (ascending / descending) and by creation date (ascending/descending);\
 And returns: response satus code 200 and json object with fields: ad name, link to the main image (first in the list), price.
 
+>>If query param has `"byDate"` the date field is added to the object.
+
 #### Arguments:
 
 | Query  parameters                 |   type   | description                                           | require |
@@ -244,20 +262,20 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 | **sort="byPriceDesc,byDateAsc"**  | `string` | sorts by price descending and<br />by date ascending  | `false` |
 
 >Position of the attributes passed in the query request is not important.
+>If attributes duplicates func (`isValidQuery`) takes first of them. For example: (sort=byPriceAsc,byPriceAsc) is same that sort=byPriceAsc.
+>Max 2 atruattributes  passed in the query request
 
 #### Errors:
 
-| Parameter         |   type   |      values       |
-| ----------------- | :------: | :---------------: |
-| **ERROR_MESSAGE** | `string` | "Bad Sort Fields" |
+| Parameter         |   type   |                                             values                                              |
+| ----------------- | :------: | :---------------------------------------------------------------------------------------------: |
+| **ERROR_MESSAGE** | `string` | "Bad Sort Fields" </br> "Page must be > 0" </br> "no content on page, try enter a smaller page" |
 
 #### Examples:
 
 #### 1. GET `http://localhost:3000/api/ads?page=1&sort=byPriceAsc`
 
 Returns response satus code 200, and page (sortred array of object by price ascendin) max ads on one page 10, <br /> each object has contains a title, price, link to the main image (first in the list) of ad. 
-
->If query param has `"byDate"` the date field is added to the object.
 
 ```json
 [
@@ -316,7 +334,7 @@ Returns response satus code 200, and page (sortred array of object by price asce
 
 #### 2. GET `http://localhost:3000/api/ads?page=2&sort=byPriceDesc,byDateAsc`
 
-returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, each object has contains a title, price, link to the main image (first in the list) of ad.
+Returns response satus code 200, and page (sortred array of object by price descending and by date ascending) max ads on one page 10, each object has contains a title, price, link to the main image (first in the list), and date of ad.
 
 ```json
 [
@@ -417,15 +435,15 @@ Returns response satus code 201, and a json object which contains an id of creat
 #### Arguments:
 This method takes: id of Ad title as a query param and body: title, description, links images, price, and returns updated ad in JSON foramt.
 
-| Parameter          |    Type    | Description       |                                  Validation                                   | Require |
-| ------------------ | :--------: | ----------------- | :---------------------------------------------------------------------------: | :-----: |
-| ***Query param***  |            |                   |                                                                               |         |
-| **id**             |  `string`  | uniq param for ad |                      /^[0-9a-fA-F]{24}$/ (typeObjectId)                       | `true`  |
-| ***Request Body*** |            |                   |                                                                               |         |
-| **title**          |  `string`  | name of ad        |                            max length 200 symbols                             | `true`  |
-| **description**    |  `string`  | description of ad |                            max length 1000 symbols                            | `true`  |
-| **price**          |  `number`  | price of ad       |                                   price > 0                                   | `true`  |
-| **imgURLs**        | `string[]` | image of ad       | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
+| Parameter          |    Type    | Description              |                                  Validation                                   | Require |
+| ------------------ | :--------: | ------------------------ | :---------------------------------------------------------------------------: | :-----: |
+| ***Query param***  |            |                          |                                                                               |         |
+| **id**             | `ObjectId` | uniq string param for ad |                     /^[0-9a-fA-F]{24}$/ (type `ObjectId`)                     | `true`  |
+| ***Request Body*** |            |                          |                                                                               |         |
+| **title**          |  `string`  | name of ad               |                            max length 200 symbols                             | `true`  |
+| **description**    |  `string`  | description of ad        |                            max length 1000 symbols                            | `true`  |
+| **price**          |  `number`  | price of ad              |                                   price > 0                                   | `true`  |
+| **imgURLs**        | `string[]` | image of ad              | min 1 link, max 3 links, each of image <br /> must contains http/https method | `true`  |
 
 #### Errors:
 
@@ -464,17 +482,17 @@ Returns updated ad and response status code 200.
   "__v": 0
 }
 ```
->Date also updated
+>Date also updated.
 
 ### DELETE Ad
 
-This method takes: id of Ad title as a query param and delete ad returns delete id of ad in JSON format
+This method takes: id of Ad title as a query param and delete ad and returns deleted id of ad in JSON format.
 
 #### Arguments:
 
-| Query parameter |   type   | description       | require | validation                         |
-| --------------- | :------: | ----------------- | :-----: | :--------------------------------- |
-| **id**          | `string` | uniq param for ad | `true`  | /^[0-9a-fA-F]{24}$/ (typeObjectId) |
+| Query parameter |    type    | description              | require | validation                            |
+| --------------- | :--------: | ------------------------ | :-----: | :------------------------------------ |
+| **id**          | `ObjectId` | uniq string param for ad | `true`  | /^[0-9a-fA-F]{24}$/ (type `ObjectId`) |
 
 #### Errors:
 
