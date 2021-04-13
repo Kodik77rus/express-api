@@ -46,7 +46,9 @@ describe('Validation  for GET /ads endpoint', () => {
     third: { page: '-1', sort: 'test_1,test_2' },
     fourth: { page: '2', sort: 'byPriceDesc,byDateAsc,byDateAsc' },
     fifth: { page: '1', sort: 'byDateAsc' },
+    fifth_2: { page: '1', sort: 'byDateAsc,byDateAsc'},
     sixth: { page: '1', sort: 'byPriceAsc' },
+    sixth_2: { page: '1', sort: 'byPriceAsc' },
     seventh: { page: '1', sort: 'byDateDesc' },
     eighth: { page: '1', sort: 'byPriceDesc' },
     ninth: { page: '1', sort: 'byPriceDesc,byDateDesc' },
@@ -78,7 +80,7 @@ describe('Validation  for GET /ads endpoint', () => {
     expect(querySortValidator(testQueries.third)).toBeFalsy()
   })
 
-  test('params (min 1, max 2) in key (sort) must be different', () => {
+  test('params (min 1, max 2) in key (sort)', () => {
     expect(querySortValidator(testQueries.fourth)).toBeFalsy()
   })
 
@@ -86,8 +88,16 @@ describe('Validation  for GET /ads endpoint', () => {
     expect(querySortValidator(testQueries.fifth)).toEqual(testRes.fifthRes)
   })
 
+  test('it should be validated 1.1 (if sort fields duplicates func takes first of them)', () => {
+    expect(querySortValidator(testQueries.fifth_2)).toEqual(testRes.fifthRes)
+  })
+
   test('it should be validated 2', () => {
     expect(querySortValidator(testQueries.sixth)).toEqual(testRes.sixthRes)
+  })
+
+  test('it should be validated 2.1 (if sort fields duplicates func takes first of them)', () => {
+    expect(querySortValidator(testQueries.sixth_2)).toEqual(testRes.sixthRes)
   })
 
   test('it should be validated 3', () => {
@@ -122,7 +132,9 @@ describe('Validation for GET /ad endpoint', () => {
     third: 'imgURLs,description,imgURLs',
     fourth: 'imgURLs,description',
     fifth: 'description',
-    sixth: 'imgURLs'
+    fifth_2: 'description,description',
+    sixth: 'imgURLs',
+    sixth_2: 'imgURLs,imgURLs',
   }
 
   test('it should be a strings', () => {
@@ -133,7 +145,7 @@ describe('Validation for GET /ad endpoint', () => {
     expect(queryAdValidator(testQueries.second)).toBeFalsy()
   })
 
-  test('field should contains min 1, max 2 value, values must be different', () => {
+  test('field should contains min 1, max 2 value', () => {
     expect(queryAdValidator(testQueries.third)).toBeFalsy()
   })
 
@@ -145,7 +157,15 @@ describe('Validation for GET /ad endpoint', () => {
     expect(queryAdValidator(testQueries.fifth)).toEqual(PARSED_OBJECTS.withDescription)
   })
 
+  test('it should be validated 2.1 (if fields duplicates func takes first of them)', () => {
+    expect(queryAdValidator(testQueries.fifth_2)).toEqual(PARSED_OBJECTS.withDescription)
+  })
+
   test('it should be validated 3', () => {
     expect(queryAdValidator(testQueries.sixth)).toEqual(PARSED_OBJECTS.withImgURLs)
+  })
+
+  test('it should be validated 3.1 (if fields duplicates func takes first of them)', () => {
+    expect(queryAdValidator(testQueries.sixth_2)).toEqual(PARSED_OBJECTS.withImgURLs)
   })
 })

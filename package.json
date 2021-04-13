@@ -4,7 +4,7 @@
   "description": "This service for storing and submitting ads",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit --runInBand",
     "start": "node index",
     "dev": "nodemon index.js"
   },
@@ -26,6 +26,7 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "moment": "^2.29.1",
-    "mongoose": "5.11.15"
+    "mongoose": "5.11.15",
+    "supertest": "^6.1.3"
   }
 }

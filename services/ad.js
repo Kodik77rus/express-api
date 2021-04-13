@@ -32,7 +32,7 @@ exports.getAd = async (adId, query) => {
           throw new Error(DICTIONARY.errors.badFields)
         }
       } else {
-        throw new Error(DICTIONARY.errors.badID)
+        throw new Error(DICTIONARY.errors.badId)
       }
     } else {
       throw new Error(DICTIONARY.errors.badRequest)
@@ -99,7 +99,7 @@ exports.updateAd = async (adId, body) => {
         throw new Error(DICTIONARY.errors.badBody)
       }
     } else {
-      throw new Error(DICTIONARY.errors.badID)
+      throw new Error(DICTIONARY.errors.badId)
     }
   } catch (err) {
     return err
@@ -115,7 +115,7 @@ exports.deleteAd = async adId => {
       }
       return deleteAd
     } else {
-      throw new Error(DICTIONARY.errors.badID)
+      throw new Error(DICTIONARY.errors.badId)
     }
   } catch (err) {
     return err

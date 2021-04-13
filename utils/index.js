@@ -1,6 +1,6 @@
 const {
   VALID_QUERY_REQ_SORT,
-  VALID_QUERY_GET_AD, 
+  VALID_QUERY_GET_AD,
   PARSED_OBJECTS,
   DICTIONARY,
   URL_REGEX
@@ -9,7 +9,7 @@ const {
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
 exports.shemaUrlValidator = urls => {
-  if (urls.map(u => URL_REGEX.test(u)).find(u => u === false) === undefined) { return true } else { return false }
+  if (urls.map(u => URL_REGEX.test(u)).includes(false)) { return false } else { return true }
 }
 
 exports.queryAdValidator = query => {
@@ -41,16 +41,11 @@ exports.serverError = (res, err) => res.status(500).json({ Error: err })
 function isСontains(initialValue, checkValue) { return initialValue.includes(checkValue) }
 
 function isValidQuery(query, dictionary) {
-  const result = query.split(',').filter(p => isСontains(dictionary, p))
-  if (result.length > 0 && result.length <= 2) {
-    for (let i = 0; i <= result.length - 1; i++) {
-      let elem = result[i]
-      for (let j = i + 1; j <= result.length - i - 1; j++) {
-        if (elem === result[j]) { return false }
-      }
-    }
-    return result.length
-  } else { return false }
+  const result = query.split(',')
+  if (result.length > 2) { return false } else {
+    const arrayFilter = result.filter((p,i,arr) => isСontains(dictionary, p) && arr.indexOf(p) === i)
+    if (arrayFilter.length > 0) { return arrayFilter.length } else { return false }
+  }
 }
 
 function adParser(countParam, query) {
