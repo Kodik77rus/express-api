@@ -68,6 +68,6 @@ exports.DICTIONARY = {
     badBody: 'Bad Body fields',
     badSortFields: 'Bad Sort Fields',
     badPage: 'Page must be > 0',
-    noContentOnPage: 'no content on page, try enter a smaller page'
+    noContentOnPage: 'No content on page, try enter a smaller page'
   }
 }
