@@ -25,7 +25,7 @@ const start = async () => {
       }
     )
     app.listen(PORT, async () => {
-      console.log(`App listening at http://localhost:${PORT}`)
+      
     })
   } catch (e) {
     console.log(e)

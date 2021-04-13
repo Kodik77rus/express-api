@@ -167,7 +167,7 @@ describe('GET Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Ad Not Found')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -179,7 +179,7 @@ describe('GET Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Bad ID')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
@@ -235,7 +235,7 @@ describe('GET Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Bad Fields')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badFields)
         done()
       })
   })
@@ -377,7 +377,7 @@ describe('GET Ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Bad Sort Fields')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badSortFields)
       })
     done()
   })
@@ -389,7 +389,7 @@ describe('GET Ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Page must be > 0')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badPage)
       })
     done()
   })
@@ -401,7 +401,7 @@ describe('GET Ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('no content on page')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.noContentOnPage)
       })
     done()
   })
@@ -437,6 +437,25 @@ describe('PUT Ad', () => {
     done()
   })
 
+  it('PUT /ad:id with bad body', (done) => {
+    request(app)
+      .put(`${urlPrefix}/ad/${adId}`)
+      .send({
+        test_1: 'test1',
+        test_2: 234,
+        test_3: 'test1',
+        imgURLs_4: ['https://test']
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err)
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badBody)
+        done()
+      })
+  })
+
   it('PUT /ad:id with not exist in db id (ObjectId)', (done) => {
     request(app)
       .put(`${urlPrefix}/ad/6064a8e1f1dcab1a764e0f01`)
@@ -451,7 +470,7 @@ describe('PUT Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Ad Not Found')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -470,7 +489,7 @@ describe('PUT Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Bad ID')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
@@ -496,7 +515,7 @@ describe('Delete Ad should be valid', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Ad Not Found')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -508,7 +527,7 @@ describe('Delete Ad should be valid', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual('Bad ID')
+        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
