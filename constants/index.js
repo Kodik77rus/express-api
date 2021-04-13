@@ -33,6 +33,7 @@ exports.PARSED_OBJECTS = {
     title: 1,
     price: 1,
     description: 1,
+    mainUrl: { $first: '$imgURLs' },
     _id: 0
   },
   withImgURLs: {
