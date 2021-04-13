@@ -39,7 +39,7 @@ describe('Schema arrays validations functions', () => {
   })
 })
 
-describe('Validation  for GET /ads endpoint', () => {
+describe('Validation for GET /ads endpoint', () => {
   const testQueries = {
     first: { test_1: 2, test_2: 'test' },
     second: { page: 2, sort: 54 },

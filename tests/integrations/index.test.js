@@ -14,29 +14,6 @@ testAd = {
   imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
 }
 
-const sortsTestQueries = (sortBy, params) => {
-  if (sortBy === 'ByPriceAsc') { return params.sort((a, b) => a.price - b.price) }
-  else if (sortBy === 'ByPriceDesc') { return params.sort((a, b) => b.price - a.price) }
-  else if (sortBy === 'ByDateAsc') { return params.sort((a, b) => new Date(a.date) - new Date(b.date)) }
-  else if (sortBy === 'ByDateDesc') { return params.sort((a, b) => new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceAsc,byDateAsc') { return params.sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)) }
-  else if (sortBy === 'byPriceDesc,byDateDesc') { return params.sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceAsc,byDateDesc') { return params.sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceDesc,byDateAsc') { return params.sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)) }
-}
-
-const sort = (sortBy, params) => {
-  if (sortBy === 'ByPriceAsc') { return params.sort((a, b) => a.price - b.price) }
-  else if (sortBy === 'ByPriceDesc') { return params.sort((a, b) => b.price - a.price) }
-  else if (sortBy === 'ByDateAsc') { return params.sort((a, b) => new Date(a.date) - new Date(b.date)) }
-  else if (sortBy === 'ByDateDesc') { return params.sort((a, b) => new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceAsc,byDateAsc') { return params.sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)) }
-  else if (sortBy === 'byPriceDesc,byDateDesc') { return params.sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceAsc,byDateDesc') { return params.sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)) }
-  else if (sortBy === 'byPriceDesc,byDateAsc') { return params.sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)) }
-}
-
-
 describe('POST /users should be valid', () => {
   it('it should create an ad', (done) => {
     request(app)
@@ -339,7 +316,7 @@ describe('GET Ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)).map(obj => ({date: obj.date, price: obj.price}))
+          [...res.body].sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price }))
         )
       })
     done()
@@ -355,7 +332,7 @@ describe('GET Ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)).map(obj => ({date: obj.date, price: obj.price}))
+          [...res.body].sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price }))
         )
       })
     done()
@@ -371,7 +348,7 @@ describe('GET Ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)).map(obj => ({date: obj.date, price: obj.price}))
+          [...res.body].sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price }))
         )
       })
     done()
@@ -387,7 +364,7 @@ describe('GET Ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)).map(obj => ({date: obj.date, price: obj.price}))
+          [...res.body].sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price }))
         )
       })
     done()
@@ -401,6 +378,30 @@ describe('GET Ads', () => {
       .end((err, res) => {
         if (err) return done(err)
         expect(res.body.ERROR_MESSAGE).toEqual('Bad Sort Fields')
+      })
+    done()
+  })
+
+  it('GET /ads test with invalid page', (done) => {
+    request(app)
+      .get(`${urlPrefix}/ads?page=test&sort=byPriceDesc,byDateAsc`)
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err)
+        expect(res.body.ERROR_MESSAGE).toEqual('Page must be > 0')
+      })
+    done()
+  })
+
+  it('GET /ads test with bigger page', (done) => {
+    request(app)
+      .get(`${urlPrefix}/ads?page=100&sort=byPriceDesc,byDateAsc`)
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err)
+        expect(res.body.ERROR_MESSAGE).toEqual('no content on page')
       })
     done()
   })
