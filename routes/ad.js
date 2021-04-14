@@ -1,4 +1,5 @@
 const express = require('express')
+
 const adControler = require('../controllers/ad.js')
 
 const router = express.Router()

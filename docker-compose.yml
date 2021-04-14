@@ -13,6 +13,7 @@ services:
 
   mongo-express:
     image: mongo-express
+    restart: always
     environment:
       ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
       ME_CONFIG_MONGODB_SERVER: mongo
