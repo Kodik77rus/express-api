@@ -269,7 +269,7 @@ And returns: response satus code 200 and json object with fields: ad name, link 
 
 | Parameter         |   type   |                                             values                                              |
 | ----------------- | :------: | :---------------------------------------------------------------------------------------------: |
-| **ERROR_MESSAGE** | `string` | "Bad Sort Fields" </br> "Page must be > 0" </br> "no content on page, try enter a smaller page" |
+| **ERROR_MESSAGE** | `string` | "Bad Sort Fields" </br> "Page must be > 0" </br> "No content on page, try enter a smaller page" |
 
 #### Examples:
 
