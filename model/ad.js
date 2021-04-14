@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const { shemaUrlValidator, shemaArrayValidator } = require('../utils')
+const validator = require('../utils')
 const { DICTIONARY } = require('../constants')
 
 const adsSchema = new Schema({
@@ -25,12 +25,12 @@ const adsSchema = new Schema({
   imgURLs: {
     type: [String],
     validate: {
-      validator: shemaArrayValidator,
+      validator: validator.shemaArrayValidator,
       message: DICTIONARY.schema.imgURLs
     }
   }
 })
 
-adsSchema.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schema.validationUrl)
+adsSchema.path('imgURLs').validate(validator.shemaUrlValidator, DICTIONARY.schema.validationUrl)
 
 module.exports = model('Ads', adsSchema)

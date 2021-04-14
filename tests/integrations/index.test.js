@@ -14,7 +14,7 @@ testAd = {
   imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
 }
 
-describe('POST /users should be valid', () => {
+describe('POST /users', () => {
   it('it should create an ad', (done) => {
     request(app)
       .post(`${urlPrefix}/ad`)
@@ -43,12 +43,12 @@ describe('POST /users should be valid', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining(`${'Ads validation failed: ' +
+        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: ' +
           'price: ' + DICTIONARY.schema.price + ', ' +
           'description: ' + DICTIONARY.schema.description + ', ' +
           'title: ' + DICTIONARY.schema.title + ', ' +
           'imgURLs: ' + DICTIONARY.schema.imgURLs
-          }`))
+          ))
         done()
       })
   })
@@ -145,7 +145,7 @@ describe('POST /users should be valid', () => {
   })
 })
 
-describe('GET Ad', () => {
+describe('GET /ad', () => {
   it('GET /ad:id should be valid', (done) => {
     request(app)
       .get(`${urlPrefix}/ad/${adId}`)
@@ -241,7 +241,7 @@ describe('GET Ad', () => {
   })
 })
 
-describe('GET Ads', () => {
+describe('GET /ads', () => {
   it('GET /ads?page=1&sort=byPriceAsc should be valid', (done) => {
     request(app)
       .get(`${urlPrefix}/ads?page=1&sort=byPriceAsc`)
@@ -407,7 +407,7 @@ describe('GET Ads', () => {
   })
 })
 
-describe('PUT Ad', () => {
+describe('PUT /ad', () => {
   it('PUT /ad:id should be valid', (done) => {
     request(app)
       .put(`${urlPrefix}/ad/${adId}`)
@@ -495,7 +495,7 @@ describe('PUT Ad', () => {
   })
 })
 
-describe('Delete Ad should be valid', () => {
+describe('DELETE Ad', () => {
   it('Delete /ad:id should be valid', (done) => {
     request(app)
       .delete(`${urlPrefix}/ad/${adId}`)
