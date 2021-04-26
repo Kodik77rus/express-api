@@ -6,42 +6,42 @@ const {
   URL_REGEX
 } = require('../constants')
 
-class ValidationError extends Error {
+exports.ValidationError = class extends Error {
   constructor(message) {
     super(message)
     this.name = 'ValidationError'
   }
 }
 
-const shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
+exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
-const shemaUrlValidator = urls => {
+exports.shemaUrlValidator = urls => {
   if (urls.map(u => URL_REGEX.test(u)).includes(false)) { return false } else { return true }
 }
 
-const queryAdValidator = query => {
+exports.queryAdValidator = query => {
   const countParam = isValidQuery(query, VALID_QUERY_GET_AD)
   if (countParam) { return adParser(countParam, query) }
   else { return false }
 }
 
-const querySortValidator = query => {
+exports.querySortValidator = query => {
   const countParam = isValidQuery(query.sort, VALID_QUERY_REQ_SORT)
   if (countParam) { return sortParser(countParam, query.sort) }
   else { return false }
 }
 
-const updateAdlidator = body => {
+exports.updateAdlidator = body => {
   if (body.imgURLs || body.title || body.description || body.price) { return true } else { return false }
 }
 
-const errorHandler = (err, res) => {
+exports.errorHandler = (err, res) => {
   if (err.name === "ValidationError") {
     res.status(400).json({ ERROR_MESSAGE: err.message })
   } else { res.status(500).json({ ERROR_MESSAGE: err }) }
 }
 
-const notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.notFound)
+exports.notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.notFound)
 
 function isСontains(initialValue, checkValue) { return initialValue.includes(checkValue) }
 
@@ -79,15 +79,4 @@ function sortParser(countParam, query) {
   } else if (countParam === 1 && isСontains(query, 'Price')) {
     return { price: isСontains(keys[0], 'Asc') ? 1 : -1 }
   } else { return { date: isСontains(keys[0], 'Asc') ? 1 : -1 } }
-}
-
-module.exports = {
-  ValidationError,
-  shemaArrayValidator,
-  shemaUrlValidator,
-  queryAdValidator,
-  querySortValidator,
-  updateAdlidator,
-  errorHandler,
-  notFoundError
 }

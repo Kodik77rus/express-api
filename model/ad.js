@@ -1,9 +1,15 @@
-const { Schema, model } = require('mongoose')
-
+const mongoose  = require('mongoose')
 const { shemaArrayValidator, shemaUrlValidator } = require('../utils')
 const { DICTIONARY } = require('../constants')
 
+const Schema = mongoose.Schema
+const model = mongoose.model
+
 const adsSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: true
+  },
   title: {
     type: String,
     maxlength: 200,

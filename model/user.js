@@ -1,4 +1,7 @@
-const { Schema, model } = require('mongoose')
+const mongoose  = require('mongoose')
+
+const Schema = mongoose.Schema
+const model = mongoose.model
 
 const userShema = new Schema({
   userName: {
@@ -10,17 +13,13 @@ const userShema = new Schema({
     type: String,
     require: true,
   },
-  roles: {
+  role: {
     type: String,
     ref: 'Role',
   },
   regDate: {
     type: Date,
     default: Date.now
-  },
-  ads: {
-    type: Array,
-    ref: 'Ads'
   }
 })
 
