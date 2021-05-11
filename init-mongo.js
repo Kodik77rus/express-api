@@ -1,25 +1,25 @@
-db = new Mongo().getDB('admin');
+db = new Mongo().getDB('admin')
 
 db.createUser({
   user: 'admin',
   pwd: 'root',
   roles: [{
     role: 'clusterAdmin',
-    db: 'admin'
-  }]
+    db: 'admin',
+  }],
 })
 
-db.auth('admin', 'root');
+db.auth('admin', 'root')
 
-db = db.getSiblingDB('firstAPI');
+db = db.getSiblingDB('firstAPI')
 
 db.createUser({
   user: 'user',
   pwd: 'pwd',
   roles: [{
     role: 'readWrite',
-    db: 'firstAPI'
-  }]
+    db: 'firstAPI',
+  }],
 })
 
 db.createCollection('ads')

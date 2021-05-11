@@ -6,13 +6,13 @@ const {
   ValidationError,
   queryAdValidator,
   querySortValidator,
-  updateAdlidator
+  updateAdlidator,
 } = require('../utils')
 const {
   PAGE_SIZE,
   DICTIONARY,
   PARSED_OBJECTS,
-  DATE_FORMAT
+  DATE_FORMAT,
 } = require('../constants')
 
 exports.getAd = async (adId, query) => {
@@ -54,7 +54,7 @@ exports.getAds = async query => {
               title: a.title,
               price: a.price,
               mainUrl: a.mainUrl,
-              date: moment(a.date).format(DATE_FORMAT)
+              date: moment(a.date).format(DATE_FORMAT),
             }))
           } else { throw new ValidationError(DICTIONARY.errors.noContentOnPage) }
         } else if (isValid) {

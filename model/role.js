@@ -4,8 +4,8 @@ const roleSchema = new Schema({
   value: {
     type: String,
     uniq: true,
-    default: 'USER'
-  }
+    default: 'USER',
+  },
 })
 
 module.exports = model('Role', roleSchema)

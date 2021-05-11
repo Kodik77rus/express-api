@@ -3,7 +3,7 @@ const {
   VALID_QUERY_GET_AD,
   PARSED_OBJECTS,
   DICTIONARY,
-  URL_REGEX
+  URL_REGEX,
 } = require('../constants')
 
 exports.ValidationError = class extends Error {
@@ -32,11 +32,15 @@ exports.querySortValidator = query => {
 }
 
 exports.updateAdlidator = body => {
-  if (body.imgURLs || body.title || body.description || body.price) { return true } else { return false }
+  if (body.imgURLs || body.title || body.description || body.price) {
+    return true
+  } else {
+    return false
+  }
 }
 
 exports.errorHandler = (err, res) => {
-  if (err.name === "ValidationError") {
+  if (err.name === 'ValidationError') {
     res.status(400).json({ ERROR_MESSAGE: err.message })
   } else { res.status(500).json({ ERROR_MESSAGE: err }) }
 }
@@ -69,12 +73,12 @@ function sortParser(countParam, query) {
   if (countParam === 2 && isСontains(query, 'Price')) {
     return {
       price: isСontains(keys[0], 'Asc') ? 1 : -1,
-      date: isСontains(keys[1], 'Asc') ? 1 : -1
+      date: isСontains(keys[1], 'Asc') ? 1 : -1,
     }
   } else if (countParam === 2) {
     return {
       price: isСontains(keys[1], 'Asc') ? 1 : -1,
-      date: isСontains(keys[0], 'Asc') ? 1 : -1
+      date: isСontains(keys[0], 'Asc') ? 1 : -1,
     }
   } else if (countParam === 1 && isСontains(query, 'Price')) {
     return { price: isСontains(keys[0], 'Asc') ? 1 : -1 }

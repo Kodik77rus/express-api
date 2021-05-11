@@ -3,7 +3,7 @@ const {
   shemaArrayValidator,
   shemaUrlValidator,
   querySortValidator,
-  queryAdValidator
+  queryAdValidator,
 } = require('../../utils')
 
 
@@ -13,7 +13,7 @@ describe('Schema arrays validations functions', () => {
     second: [2, 3, 4, 5],
     third: ['sample_1', 'sample_2', 'sample_3', 'sample_4'],
     fourth: ['sample_1', 'sample_2', 'sample_3'],
-    fifth: ['https://sample_1', 'https://sample_2']
+    fifth: ['https://sample_1', 'https://sample_2'],
   }
 
   test('it should not be empty array', () => {
@@ -46,7 +46,7 @@ describe('Validation for GET /ads endpoint', () => {
     third: { page: '-1', sort: 'test_1,test_2' },
     fourth: { page: '2', sort: 'byPriceDesc,byDateAsc,byDateAsc' },
     fifth: { page: '1', sort: 'byDateAsc' },
-    fifth_2: { page: '1', sort: 'byDateAsc,byDateAsc'},
+    fifth_2: { page: '1', sort: 'byDateAsc,byDateAsc' },
     sixth: { page: '1', sort: 'byPriceAsc' },
     sixth_2: { page: '1', sort: 'byPriceAsc' },
     seventh: { page: '1', sort: 'byDateDesc' },
@@ -61,11 +61,11 @@ describe('Validation for GET /ads endpoint', () => {
     fifthRes: { date: 1 },
     sixthRes: { price: 1 },
     seventhRes: { date: - 1 },
-    eighthRes: { price: -1, },
+    eighthRes: { price: -1 },
     ninthRes: { price: -1, date: -1 },
     tenthRes: { price: 1, date: 1 },
     eleventhRes: { price: 1, date: -1 },
-    twelfthRes: { price: -1, date: 1 }
+    twelfthRes: { price: -1, date: 1 },
   }
 
   test('it should contains keys: page,sort', () => {

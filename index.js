@@ -23,8 +23,8 @@ const start = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
-        useCreateIndex: true
-      }
+        useCreateIndex: true,
+      },
     )
     app.listen(PORT, async () => {
       console.log(`App listening at http://localhost:${PORT}`)

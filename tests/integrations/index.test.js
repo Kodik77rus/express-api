@@ -11,7 +11,7 @@ testAd = {
   title: 'test',
   description: 'test',
   price: 1020,
-  imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
+  imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg'],
 }
 
 describe('POST /users', () => {
@@ -27,7 +27,7 @@ describe('POST /users', () => {
         expect(res.body).toEqual(
           expect.objectContaining({
             id: expect.any(String),
-          })
+          }),
         )
         adId = res.body.id
         done()
@@ -47,8 +47,8 @@ describe('POST /users', () => {
           'price: ' + DICTIONARY.schema.price + ', ' +
           'description: ' + DICTIONARY.schema.description + ', ' +
           'title: ' + DICTIONARY.schema.title + ', ' +
-          'imgURLs: ' + DICTIONARY.schema.imgURLs
-          ))
+          'imgURLs: ' + DICTIONARY.schema.imgURLs,
+        ))
         done()
       })
   })
@@ -59,7 +59,7 @@ describe('POST /users', () => {
       .send({
         description: 'test',
         price: 9098,
-        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
+        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -77,7 +77,7 @@ describe('POST /users', () => {
       .send({
         title: 'test',
         price: 9098,
-        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
+        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -95,7 +95,7 @@ describe('POST /users', () => {
       .send({
         title: 'test',
         description: 'test',
-        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg']
+        imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -113,7 +113,7 @@ describe('POST /users', () => {
       .send({
         title: 'test',
         description: 'test',
-        price: 9098
+        price: 9098,
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -132,7 +132,7 @@ describe('POST /users', () => {
         title: 'test',
         description: 'test',
         price: 9098,
-        imgURLs: ['mainImg', 'secondImg', 'thirdImg']
+        imgURLs: ['mainImg', 'secondImg', 'thirdImg'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -252,7 +252,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => obj.price)).toEqual(
-          [...res.body].sort((a, b) => a.price - b.price).map(obj => obj.price)
+          [...res.body].sort((a, b) => a.price - b.price).map(obj => obj.price),
         )
       })
     done()
@@ -268,7 +268,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => obj.date)).toEqual(
-          [...res.body].sort((a, b) => new Date(a.date) - new Date(b.date)).map(obj => obj.date)
+          [...res.body].sort((a, b) => new Date(a.date) - new Date(b.date)).map(obj => obj.date),
         )
       })
     done()
@@ -284,7 +284,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => obj.price)).toEqual(
-          [...res.body].sort((a, b) => b.price - a.price).map(obj => obj.price)
+          [...res.body].sort((a, b) => b.price - a.price).map(obj => obj.price),
         )
       })
     done()
@@ -300,7 +300,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => obj.date)).toEqual(
-          [...res.body].sort((a, b) => new Date(b.date) - new Date(a.date)).map(obj => obj.date)
+          [...res.body].sort((a, b) => new Date(b.date) - new Date(a.date)).map(obj => obj.date),
         )
       })
     done()
@@ -316,7 +316,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price }))
+          [...res.body].sort((a, b) => a.price - b.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price })),
         )
       })
     done()
@@ -332,7 +332,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price }))
+          [...res.body].sort((a, b) => b.price - a.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price })),
         )
       })
     done()
@@ -348,7 +348,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price }))
+          [...res.body].sort((a, b) => a.price - b.price || new Date(b.date) - new Date(a.date)).map(obj => ({ date: obj.date, price: obj.price })),
         )
       })
     done()
@@ -364,7 +364,7 @@ describe('GET /ads', () => {
         expect(Array.isArray(res.body)).toBeTruthy()
         expect(res.body).toHaveLength(10)
         expect(res.body.map(obj => ({ date: obj.date, price: obj.price }))).toEqual(
-          [...res.body].sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price }))
+          [...res.body].sort((a, b) => b.price - a.price || new Date(a.date) - new Date(b.date)).map(obj => ({ date: obj.date, price: obj.price })),
         )
       })
     done()
@@ -415,7 +415,7 @@ describe('PUT /ad', () => {
         title: 'test1',
         price: 234,
         description: 'test1',
-        imgURLs: ['https://test']
+        imgURLs: ['https://test'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -425,7 +425,7 @@ describe('PUT /ad', () => {
         expect(res.body).toEqual(
           expect.objectContaining({
             date: expect.any(String),
-          })
+          }),
         )
         expect(res.body.title).toEqual('test1')
         expect(res.body.price).toEqual(234)
@@ -444,7 +444,7 @@ describe('PUT /ad', () => {
         test_1: 'test1',
         test_2: 234,
         test_3: 'test1',
-        imgURLs_4: ['https://test']
+        imgURLs_4: ['https://test'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -463,7 +463,7 @@ describe('PUT /ad', () => {
         title: 'test1',
         price: 234,
         description: 'test1',
-        imgURLs: ['https://test']
+        imgURLs: ['https://test'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -482,7 +482,7 @@ describe('PUT /ad', () => {
         title: 'test1',
         price: 234,
         description: 'test1',
-        imgURLs: ['https://test']
+        imgURLs: ['https://test'],
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)

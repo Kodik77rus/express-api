@@ -7,7 +7,7 @@ const { secret } = require('../configs/jwt.config')
 const generateAccessToken = (id, role) => {
   const payload = {
     id,
-    role
+    role,
   }
   return jwt.sign(payload, secret, { expiresIn: '24h' })
 }
@@ -23,7 +23,7 @@ exports.registrations = async user => {
     const userRole = await Role.findOne({ value: 'USER' })
     const newUser = new User({ userName, password: hashPassword, role: userRole.value })
     await newUser.save()
-    return "user seccsesfull registarate"
+    return 'user seccsesfull registarate'
   } catch (err) {
     throw err
   }

@@ -9,7 +9,7 @@ exports.roleMiddlewaree = (role) => {
         !hashRole
       }
       if(hashRole){
-        return  res.status(403).json({ message: 'acсess denied' })
+        return res.status(403).json({ message: 'acсess denied' })
       }
       next()
     } catch {
