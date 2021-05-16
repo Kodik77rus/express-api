@@ -76,10 +76,10 @@ exports.DICTIONARY = {
     noContentOnPage: 'No content on page, try enter a smaller page',
   },
   authErrors: {
-    userNotAuth: "user not authorizate",
+    userNotAuth: 'user not authorizate',
     accessDenied: 'acсess denied',
     userAlreadyExist: 'User already exist',
-    UserNotFound: "User not found",
-    badPassword: "Bad password"
+    UserNotFound: 'User not found',
+    badPassword: 'Bad password',
   },
 }

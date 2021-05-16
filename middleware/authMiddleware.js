@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+
 const { secret } = require('../configs/jwt.config')
 const { DICTIONARY } = require('../constants/index')
 

@@ -2,7 +2,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../model/user')
 const Role = require('../model/role')
-const { secret } = require('../configs/jwt.config')
+const secret = require('../configs/jwt.config')
+
 const { AuthError } = require('../utils/index')
 const { DICTIONARY, ACCESS_ROLES } = require('../constants/index')
 

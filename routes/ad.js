@@ -1,4 +1,5 @@
 const express = require('express')
+
 const adControler = require('../controllers/ad')
 const { authMiddleware } = require('../middleware/authMiddleware')
 const { roleMiddlewaree } = require('../middleware/roleMiddleWare')
@@ -6,7 +7,7 @@ const {
   adValidator,
   adsValidation,
   updateAdValidation,
-  deleteAdValidation
+  deleteAdValidation,
 } = require('../middleware/validationMiddleware')
 const { ACCESS_ROLES } = require('../constants/index')
 

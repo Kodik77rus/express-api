@@ -1,4 +1,8 @@
-const { PARSED_OBJECTS, DICTIONARY, URL_REGEX } = require('../../../Users/george/Desktop/constants')
+const {
+  PARSED_OBJECTS,
+  DICTIONARY,
+  URL_REGEX,
+} = require('../constants/index')
 
 exports.updateAdlidator = body => {
   if (body.imgURLs || body.title || body.description || body.price) {
