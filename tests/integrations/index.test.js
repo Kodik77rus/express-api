@@ -14,7 +14,7 @@ testAd = {
   imgURLs: ['https://mainImg', 'https://secondImg', 'https://thirdImg'],
 }
 
-describe('POST /users', () => {
+describe('POST /ad', () => {
   it('it should create an ad', (done) => {
     request(app)
       .post(`${urlPrefix}/ad`)
@@ -43,7 +43,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: ' +
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: ' +
           'price: ' + DICTIONARY.schema.price + ', ' +
           'description: ' + DICTIONARY.schema.description + ', ' +
           'title: ' + DICTIONARY.schema.title + ', ' +
@@ -66,7 +66,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: title: ' + DICTIONARY.schema.title))
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: title: ' + DICTIONARY.schema.title))
         done()
       })
   })
@@ -84,7 +84,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: description: ' + DICTIONARY.schema.description))
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: description: ' + DICTIONARY.schema.description))
         done()
       })
   })
@@ -102,7 +102,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: price: ' + DICTIONARY.schema.price))
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: price: ' + DICTIONARY.schema.price))
         done()
       })
   })
@@ -120,7 +120,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: imgURLs: ' + DICTIONARY.schema.imgURLs))
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: imgURLs: ' + DICTIONARY.schema.imgURLs))
         done()
       })
   })
@@ -139,7 +139,7 @@ describe('POST /users', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(expect.stringContaining('Ads validation failed: imgURLs: ' + DICTIONARY.schema.validationUrl))
+        expect(res.body.VALIDATION_ERROR).toEqual(expect.stringContaining('Ads validation failed: imgURLs: ' + DICTIONARY.schema.validationUrl))
         done()
       })
   })
@@ -167,7 +167,7 @@ describe('GET /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -179,7 +179,7 @@ describe('GET /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
@@ -235,7 +235,7 @@ describe('GET /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badFields)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badFields)
         done()
       })
   })
@@ -377,7 +377,7 @@ describe('GET /ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badSortFields)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badSortFields)
       })
     done()
   })
@@ -389,7 +389,7 @@ describe('GET /ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badPage)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badPage)
       })
     done()
   })
@@ -401,7 +401,7 @@ describe('GET /ads', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.noContentOnPage)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.noContentOnPage)
       })
     done()
   })
@@ -451,7 +451,7 @@ describe('PUT /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badBody)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badBody)
         done()
       })
   })
@@ -470,7 +470,7 @@ describe('PUT /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -489,7 +489,7 @@ describe('PUT /ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
@@ -515,7 +515,7 @@ describe('DELETE Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.adNotFound)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.adNotFound)
         done()
       })
   })
@@ -527,7 +527,7 @@ describe('DELETE Ad', () => {
       .expect(400)
       .end((err, res) => {
         if (err) return done(err)
-        expect(res.body.ERROR_MESSAGE).toEqual(DICTIONARY.errors.badId)
+        expect(res.body.VALIDATION_ERROR).toEqual(DICTIONARY.errors.badId)
         done()
       })
   })
