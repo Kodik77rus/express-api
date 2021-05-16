@@ -21,10 +21,10 @@ exports.getAd = async (adId, query) => {
   throw new ValidationError(DICTIONARY.errors.adNotFound)
 }
 
-exports.getAds = async query => {
+exports.getAds = async (query, user) => {
   const parsedAdsQuery = sortAdsParser(query.countQuery, query.sort)
   const ads = await Ads
-    .find({}, parsedAdsQuery.date ? PARSED_OBJECTS.withDate : PARSED_OBJECTS.withoutParams)
+    .find({ _id: user.id }, parsedAdsQuery.date ? PARSED_OBJECTS.withDate : PARSED_OBJECTS.withoutParams)
     .skip(PAGE_SIZE * (query.page - 1))
     .limit(PAGE_SIZE)
     .sort(parsedAdsQuery)
@@ -39,7 +39,8 @@ exports.getAds = async query => {
   throw new ValidationError(DICTIONARY.errors.noContentOnPage)
 }
 
-exports.createAd = async ad => {
+exports.createAd = async (ad, user) => {
+  ad.userId = user.id
   const createdAd = await new Ads(ad).save()
   return createdAd._id
 }
@@ -52,7 +53,7 @@ exports.updateAd = async (adId, body) => {
   throw new ValidationError(DICTIONARY.errors.adNotFound)
 }
 
-exports.deleteAd = async adId => {
+exports.deleteAd = async (adId) => {
   const deletedAd = await Ads.findOneAndDelete({ _id: adId })
   if (deletedAd !== null) {
     return deletedAd._id

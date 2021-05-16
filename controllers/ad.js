@@ -11,7 +11,7 @@ exports.getAd = async (req, res) => {
 
 exports.getAds = async (req, res) => {
   try {
-    res.status(200).json(await adServces.getAds(req.query))
+    res.status(200).json(await adServces.getAds(req.query, req.user))
   } catch (err) {
     errorHandler(err, res)
   }
@@ -19,7 +19,7 @@ exports.getAds = async (req, res) => {
 
 exports.createAd = async (req, res) => {
   try {
-    res.status(201).json({ id: await adServces.createAd(req.body) })
+    res.status(201).json({ id: await adServces.createAd(req.body, req.user) })
   } catch (err) {
     errorHandler(err, res)
   }
