@@ -2,7 +2,12 @@ const express = require('express')
 const adControler = require('../controllers/ad')
 const { authMiddleware } = require('../middleware/authMiddleware')
 const { roleMiddlewaree } = require('../middleware/roleMiddleWare')
-const { adValidator, adsValidation, updateAdValidation, deleteAdValidation } = require('../middleware/validationMiddleware')
+const {
+  adValidator,
+  adsValidation,
+  updateAdValidation,
+  deleteAdValidation
+} = require('../middleware/validationMiddleware')
 
 const router = express.Router()
 

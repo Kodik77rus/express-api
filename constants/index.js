@@ -64,19 +64,22 @@ exports.DICTIONARY = {
     imgURLs: 'You must pass an array of more than 1 url and no more than 3 urls',
     validationUrl: 'Invalid URL, URL must contains http or https',
   },
-  errors: {
+  validationErrors: {
     badRequest: 'Bad Request',
     notFound: 'Not Found',
     badId: 'Bad ID',
     adNotFound: 'Ad Not Found',
     badFields: 'Bad Fields',
-    badBody: 'Bad Body fields',
+    badBody: 'Bad Body Fields',
     badSortFields: 'Bad Sort Fields',
     badPage: 'Page must be > 0',
     noContentOnPage: 'No content on page, try enter a smaller page',
   },
   authErrors: {
+    userNotAuth: "user not authorizate",
     accessDenied: 'acсess denied',
-    accessDenied: 'acсess denied',
+    userAlreadyExist: 'User already exist',
+    UserNotFound: "User not found",
+    badPassword: "Bad password"
   },
 }
