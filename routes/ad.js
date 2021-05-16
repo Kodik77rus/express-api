@@ -8,13 +8,14 @@ const {
   updateAdValidation,
   deleteAdValidation
 } = require('../middleware/validationMiddleware')
+const { ACCESS_ROLES } = require('../constants/index')
 
 const router = express.Router()
 
-router.get('/ads', authMiddleware, roleMiddlewaree(['USER']), adsValidation, adControler.getAds)
-router.get('/ad/:id', authMiddleware, roleMiddlewaree(['USER']), adValidator, adControler.getAd)
-router.post('/ad', authMiddleware, roleMiddlewaree(['USER']), adControler.createAd)
-router.put('/ad/:id', authMiddleware, roleMiddlewaree(['USER']), updateAdValidation, adControler.updateAd)
-router.delete('/ad/:id', authMiddleware, roleMiddlewaree(['USER']), deleteAdValidation, adControler.deleteAd)
+router.get('/ads', authMiddleware, roleMiddlewaree([ACCESS_ROLES.user, ACCESS_ROLES.admin]), adsValidation, adControler.getAds)
+router.get('/ad/:id', authMiddleware, roleMiddlewaree([ACCESS_ROLES.user, ACCESS_ROLES.admin]), adValidator, adControler.getAd)
+router.post('/ad', authMiddleware, roleMiddlewaree([ACCESS_ROLES.user, ACCESS_ROLES.admin]), adControler.createAd)
+router.put('/ad/:id', authMiddleware, roleMiddlewaree([ACCESS_ROLES.user, ACCESS_ROLES.admin]), updateAdValidation, adControler.updateAd)
+router.delete('/ad/:id', authMiddleware, roleMiddlewaree([ACCESS_ROLES.user, ACCESS_ROLES.admin]), deleteAdValidation, adControler.deleteAd)
 
 module.exports = router
