@@ -13,8 +13,8 @@ exports.isValidQuery = (query, dictionary) => {
         return result.length
       }
     }
-    return false
   }
+  return false
 }
 
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
