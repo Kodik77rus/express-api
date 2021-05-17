@@ -4,7 +4,7 @@ const {
   shemaUrlValidator,
   isValidQuery,
   adParser,
-  sortAdsParser
+  sortAdsParser,
 } = require('../../utils')
 
 
@@ -61,30 +61,30 @@ describe('Validation for GET /ads endpoint', () => {
       price: 1,
     },
     second: {
-      price: -1
+      price: -1,
     },
     third: { //
-      date: 1
+      date: 1,
     },
     fourth: {
-      date: -1 //
+      date: -1, //
     },
     fifth: {
       price: -1,
-      date: -1
+      date: -1,
     },
     sixth: {
       price: 1,
-      date: 1
+      date: 1,
     },
     seventh: {
       price: 1,
-      date: -1
+      date: -1,
     },
     eighth: {
       price: -1,
-      date: 1
-    }
+      date: 1,
+    },
   }
 
   test('it should contains keys: page,sort', () => {
