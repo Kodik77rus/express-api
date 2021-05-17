@@ -4,27 +4,24 @@ const {
   URL_REGEX,
 } = require('../constants/index')
 
-exports.updateAdlidator = body => {
-  if (body.imgURLs || body.title || body.description || body.price) {
-    return true
+exports.isValidQuery = (query, dictionary) => {
+  if (typeof query === 'string') {
+    const result = query.split(',')
+    if (result.length < 3) {
+      const count = result.filter((p, i, arr) => isСontains(dictionary, p) && arr.indexOf(p) === i)
+      if (count.length > 0) {
+        return result.length
+      }
+    }
+    return false
   }
-  return false
 }
 
 exports.shemaArrayValidator = arr => arr.length > 0 && arr.length < 4 && Array.isArray(arr)
 
 exports.shemaUrlValidator = urls => !urls.map(u => URL_REGEX.test(u)).includes(false)
 
-exports.isValidQuery = (query, dictionary) => {
-  const result = query.split(',')
-  if (result.length < 3) {
-    const count = result.filter((p, i, arr) => isСontains(dictionary, p) && arr.indexOf(p) === i)
-    if (count.length > 0) {
-      return result.length
-    }
-    return false
-  }
-}
+exports.updateAdlidator = body => body.imgURLs || body.title || body.description || body.price
 
 exports.adParser = (countParam, query) => {
   if (countParam === 0) {
@@ -62,6 +59,19 @@ exports.sortAdsParser = (countParam, query) => {
   return { date: isСontains(keys[0], 'Asc') ? 1 : -1 }
 }
 
+exports.errorHandler = (err, res) => {
+  switch (err.name) {
+    case 'ValidationError':
+      res.status(400).json({ VALIDATION_ERROR: err.message })
+      break
+    case 'AuthError':
+      res.status(403).json({ AUTH_ERROR: err.message })
+      break
+    default:
+      res.status(500).json({ ERROR_MESSAGE: err })
+  }
+}
+
 exports.notFoundError = (_, res) => res.status(404).json(DICTIONARY.errors.notFound)
 
 exports.ValidationError = class extends Error {
@@ -75,17 +85,6 @@ exports.AuthError = class extends Error {
   constructor(message) {
     super(message)
     this.name = 'AuthError'
-  }
-}
-
-exports.errorHandler = (err, res) => {
-  if (err.name === 'ValidationError') {
-    res.status(400).json({ VALIDATION_ERROR: err.message })
-  } else if (err.name === 'AuthError') {
-    res.status(403).json({ AUTH_ERROR: err.message })
-  }
-  else {
-    res.status(500).json({ ERROR_MESSAGE: err })
   }
 }
 

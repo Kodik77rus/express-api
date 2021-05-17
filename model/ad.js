@@ -13,17 +13,17 @@ const adsSchema = new Schema({
   title: {
     type: String,
     maxlength: 200,
-    required: [true, DICTIONARY.schema.title],
+    required: [true, DICTIONARY.schemaErrors.title],
   },
   description: {
     type: String,
     maxlength: 1000,
-    required: [true, DICTIONARY.schema.description],
+    required: [true, DICTIONARY.schemaErrors.description],
   },
   price: {
     type: Number,
     min: 0,
-    required: [true, DICTIONARY.schema.price],
+    required: [true, DICTIONARY.schemaErrors.price],
   },
   date: {
     type: Date,
@@ -33,11 +33,11 @@ const adsSchema = new Schema({
     type: [String],
     validate: {
       validator: shemaArrayValidator,
-      message: DICTIONARY.schema.imgURLs,
+      message: DICTIONARY.schemaErrors.imgURLs,
     },
   },
 })
 
-adsSchema.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schema.validationUrl)
+adsSchema.path('imgURLs').validate(shemaUrlValidator, DICTIONARY.schemaErrors.validationUrl)
 
 module.exports = model('Ads', adsSchema)

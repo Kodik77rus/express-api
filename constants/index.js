@@ -57,7 +57,7 @@ exports.PARSED_OBJECTS = {
 }
 
 exports.DICTIONARY = {
-  schema: {
+  schemaErrors: {
     title: 'Ad title required',
     description: 'Ad description required',
     price: 'Ad price required',
