@@ -9,6 +9,11 @@ exports.ACCESS_ROLES = {
   admin: 'ADMIN',
 }
 
+exports.TEST_USER = {
+  id: '60a2df494810b8222c66856d',
+  role: 'USER',
+}
+
 exports.VALID_QUERY_REQ_SORT = [
   'byPriceAsc', 'byPriceDesc',
   'byDateAsc', 'byDateDesc',

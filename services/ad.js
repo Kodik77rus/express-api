@@ -19,13 +19,13 @@ exports.getAd = async (adId, query) => {
   if (ad !== null) {
     return ad
   }
-  throw new ValidationError(DICTIONARY.errors.adNotFound)
+  throw new ValidationError(DICTIONARY.validationErrors.adNotFound)
 }
 
 exports.getAds = async (query, user) => {
   const parsedAdsQuery = sortAdsParser(query.countQuery, query.sort)
   const ads = await Ads
-    .find({ _id: user.id }, parsedAdsQuery.date ? PARSED_OBJECTS.withDate : PARSED_OBJECTS.withoutParams)
+    .find({ userId: user.id }, parsedAdsQuery.date ? PARSED_OBJECTS.withDate : PARSED_OBJECTS.withoutParams)
     .skip(PAGE_SIZE * (query.page - 1))
     .limit(PAGE_SIZE)
     .sort(parsedAdsQuery)
@@ -37,7 +37,7 @@ exports.getAds = async (query, user) => {
       date: moment(a.date).format(DATE_FORMAT),
     })) : ads
   }
-  throw new ValidationError(DICTIONARY.errors.noContentOnPage)
+  throw new ValidationError(DICTIONARY.validationErrors.noContentOnPage)
 }
 
 exports.createAd = async (ad, user) => {
@@ -51,7 +51,7 @@ exports.updateAd = async (adId, body) => {
   if (newAd !== null) {
     return newAd
   }
-  throw new ValidationError(DICTIONARY.errors.adNotFound)
+  throw new ValidationError(DICTIONARY.validationErrors.adNotFound)
 }
 
 exports.deleteAd = async (adId) => {
@@ -59,5 +59,5 @@ exports.deleteAd = async (adId) => {
   if (deletedAd !== null) {
     return deletedAd._id
   }
-  throw new ValidationError(DICTIONARY.errors.adNotFound)
+  throw new ValidationError(DICTIONARY.validationErrors.adNotFound)
 }

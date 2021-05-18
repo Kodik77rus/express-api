@@ -1,8 +1,19 @@
+const jwt = require('jsonwebtoken')
+const { secret } = require('../configs/jwt.config')
+
 const {
   PARSED_OBJECTS,
   DICTIONARY,
   URL_REGEX,
 } = require('../constants/index')
+
+exports.generateAccessToken = (id, role) => {
+  const payload = {
+    id,
+    role,
+  }
+  return jwt.sign(payload, secret, { expiresIn: '24h' })
+}
 
 exports.isValidQuery = (query, dictionary) => {
   if (typeof query === 'string') {
@@ -68,7 +79,7 @@ exports.errorHandler = (err, res) => {
     res.status(403).json({ AUTH_ERROR: err.message })
     break
   default:
-    res.status(500).json({ ERROR_MESSAGE: err })
+    res.status(500).json({ ERROR_MESSAGE: err.message })
   }
 }
 
