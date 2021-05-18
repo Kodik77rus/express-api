@@ -8,6 +8,7 @@ const {
 const {
   updateAdlidator,
   isValidQuery,
+  authBodyValidator,
 } = require('../utils/index')
 
 exports.adValidator = (req, res, next) => {
@@ -69,6 +70,18 @@ exports.deleteAdValidation = (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ VALIDATION_ERROR: DICTIONARY.validationErrors.badId })
+    }
+    next()
+  } catch {
+    return res.status(400).json({ VALIDATION_ERROR: DICTIONARY.validationErrors.badRequest })
+  }
+}
+
+exports.authValidator = (req, res, next) => {
+  try {
+    const isValid = authBodyValidator(req.body)
+    if (!isValid) {
+      return res.status(400).json({ VALIDATION_ERROR: DICTIONARY.validationErrors.badBody })
     }
     next()
   } catch {

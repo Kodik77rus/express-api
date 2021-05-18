@@ -34,6 +34,8 @@ exports.shemaUrlValidator = urls => !urls.map(u => URL_REGEX.test(u)).includes(f
 
 exports.updateAdlidator = body => body.imgURLs || body.title || body.description || body.price
 
+exports.authBodyValidator = body => body.userName && body.password
+
 exports.adParser = (countParam, query) => {
   if (countParam === 0) {
     return PARSED_OBJECTS.withoutParams
