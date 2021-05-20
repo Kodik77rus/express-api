@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
+
 const User = require('../model/user')
 const Role = require('../model/role')
-
 const {
   generateAccessToken,
   AuthError,

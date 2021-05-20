@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
-const { secret } = require('../configs/jwt.config')
 
+const { secret } = require('../configs/jwt.config')
 const {
   PARSED_OBJECTS,
   DICTIONARY,

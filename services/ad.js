@@ -1,6 +1,6 @@
 const moment = require('moment')
-const Ads = require('../model/ad')
 
+const Ads = require('../model/ad')
 const {
   ValidationError,
   adParser,
