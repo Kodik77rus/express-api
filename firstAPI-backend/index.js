@@ -6,7 +6,7 @@ const adRouter = require('./routes/ad')
 const authRouter = require('./routes/auth')
 const { notFoundError } = require('./utils/index')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 const app = express()
 
