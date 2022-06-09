@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --forceExit --runInBand",
-    "start": "node index",
+    "start": "node src/index",
     "dev": "nodemon index.js",
     "lint": "eslint . -c configs/eslintrc.js",
     "lint:fix": "eslint . -c configs/eslintrc.js --fix"

@@ -73,14 +73,14 @@ exports.sortAdsParser = (countParam, query) => {
 
 exports.errorHandler = (err, res) => {
   switch (err.name) {
-    case 'ValidationError':
-      res.status(400).json({ VALIDATION_ERROR: err.message })
-      break
-    case 'AuthError':
-      res.status(403).json({ AUTH_ERROR: err.message })
-      break
-    default:
-      res.status(500).json({ ERROR_MESSAGE: err.message })
+  case 'ValidationError':
+    res.status(400).json({ VALIDATION_ERROR: err.message })
+    break
+  case 'AuthError':
+    res.status(403).json({ AUTH_ERROR: err.message })
+    break
+  default:
+    res.status(500).json({ ERROR_MESSAGE: err.message })
   }
 }
 

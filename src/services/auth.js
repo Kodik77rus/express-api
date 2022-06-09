@@ -14,6 +14,7 @@ const {
 
 exports.registrations = async user => {
   const { userName, password } = user
+  console.log(userName, password)
   if (PASSWORD_REGEX.test(password)) {
     const candidate = await User.findOne({ userName })
     if (candidate) {
@@ -21,7 +22,8 @@ exports.registrations = async user => {
     }
     const hashPassword = bcrypt.hashSync(password, 7)
     const userRole = await Role.findOne({ value: ACCESS_ROLES.user })
-    await new User({ userName, password: hashPassword, role: userRole.value }).save()
+    console.log(userRole)
+    await new User({ userName, password: hashPassword, role: ACCESS_ROLES.user }).save()
     return 'user seccsesfull registarate' //
   }
   throw new AuthError(DICTIONARY.authErrors.badPassword)

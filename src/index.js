@@ -18,7 +18,7 @@ app.use(notFoundError)
 const start = async () => {
   try {
     await mongoose.connect(
-      process.env.DB_HOST,
+      'mongodb+srv://george:Z34vE8Nm3xaiifoF@cluster0.fihkq.mongodb.net/firstApi_v2?retryWrites=true&w=majority',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
